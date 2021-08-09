@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Text, View, Image, StyleSheet, ImageBackground, StatusBar } from 'react-native';
 
 import Logo from '../assets/presensi.png'
+import Logo2 from '../assets/umrah.png'
 import Background from '../assets/background.png'
 
 function SplashScreen({ navigation }) {
@@ -15,6 +16,10 @@ function SplashScreen({ navigation }) {
                 source={Background}
                 style={styles.background}
             >
+                <Image
+                    source={Logo2}
+                    style={styles.logo}
+                />
                 <View style={styles.subContainer}>
 
                     <Image style={styles.image} source={Logo} />
@@ -56,6 +61,13 @@ const styles = StyleSheet.create({
         color: '#FFF',
         fontSize: 22,
         fontFamily: 'Poppins-Regular'
+    },
+    logo: {
+        position: 'absolute',
+        width: 165,
+        height: 50,
+        top: 15,
+        right: 5
     }
 })
 

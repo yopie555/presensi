@@ -2,7 +2,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import SplashScreen from './src/screens/Splash'
 import LoginScreen from './src/screens/Login'
@@ -21,22 +21,27 @@ const RootHome = () => {
         tabBarIcon: ({ color }) => {
           let iconName;
 
-          if (route.name === 'HomepageScreen') {
-            iconName = 'content-copy'
-          } else if (route.name === 'HistoryScreen') {
-            iconName = 'home'
+          if (route.name === 'Presensi') {
+            iconName = 'chart-histogram'
+          } else if (route.name === 'History') {
+            iconName = 'history'
           }
           // You can return any component that you like here!
           return <Icon name={iconName} size={32} color={color} />;
         },
       })}
       tabBarOptions={{
-        activeTintColor: '#00A5f4',
-        inactiveTintColor: 'gray',
+        activeTintColor: '#DAC34D',
+        inactiveTintColor: '#FFF',
+        style: {
+          backgroundColor: '#264384',
+          borderTopWidth: 1,
+          borderColor: 'white',
+        },
       }}
     >
-      <Tab.Screen name="Beranda" component={HomepageScreen} />
-      <Tab.Screen name="Produk" component={HistoryScreen} />
+      <Tab.Screen name="Presensi" component={HomepageScreen} />
+      <Tab.Screen name="History" component={HistoryScreen} />
     </Tab.Navigator>
   )
 }

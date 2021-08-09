@@ -12,9 +12,9 @@ import {
 
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Icon2 from 'react-native-vector-icons/Fontisto';
 
 import Logo from '../assets/presensi.png'
+import Logo2 from '../assets/umrah.png'
 import Background from '../assets/background2.png'
 
 const Login = ({ navigation }) => {
@@ -29,36 +29,42 @@ const Login = ({ navigation }) => {
                 style={styles.background}
             >
                 <Image
+                    source={Logo2}
+                    style={styles.logo2}
+                />
+                <Image
                     source={Logo}
                     style={styles.logo}
                 />
                 <Text style={styles.text}>LOGIN</Text>
                 <View style={styles.container1}>
-                    <Icon
-                        name='account'
-                        size={25}
-                        color={"#C9CACC"}
-                        style={styles.icon}
-                    />
-                    <TextInput
-                        style={styles.inputText}
-                        onChangeText={(nip) => setNip(nip)}
-                        value={nip}
-                        placeholder="Masukkan NIP/NIK"
-                    />
-                    <Icon2
-                        name='locked'
-                        size={25}
-                        color={"#C9CACC"}
-                        style={styles.icon2}
-                    />
-                    <TextInput
-                        style={styles.inputText}
-                        secureTextEntry={true}
-                        onChangeText={(password) => setPassword(password)}
-                        value={password}
-                        placeholder="Kata Sandi"
-                    />
+                    <View style={styles.textContainer}>
+                        <Icon
+                            name='account'
+                            size={45}
+                            color={"#C9CACC"}
+                        />
+                        <TextInput
+                            style={styles.inputText}
+                            onChangeText={(nip) => setNip(nip)}
+                            value={nip}
+                            placeholder="Masukkan NIP/NIK"
+                        />
+                    </View>
+                    <View style={styles.textContainer}>
+                        <Icon
+                            name='lock-outline'
+                            size={45}
+                            color={"#C9CACC"}
+                        />
+                        <TextInput
+                            style={styles.inputText}
+                            secureTextEntry={true}
+                            onChangeText={(password) => setPassword(password)}
+                            value={password}
+                            placeholder="Kata Sandi"
+                        />
+                    </View>
                     <TouchableOpacity
                         style={styles.loginBtn}
                         onPress={() => navigation.navigate("HomepageScreen")}>
@@ -82,6 +88,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFF',
         alignContent: 'center',
         justifyContent: 'center',
+        borderRadius: 8
     },
     background: {
         width: '100%',
@@ -96,6 +103,13 @@ const styles = StyleSheet.create({
         aspectRatio: 0.83,
         marginBottom: 10,
     },
+    logo2: {
+        position: 'absolute',
+        width: 165,
+        height: 50,
+        top: 15,
+        right: 5
+    },
     text: {
         fontSize: 27,
         color: '#FFF',
@@ -103,25 +117,19 @@ const styles = StyleSheet.create({
         marginBottom: 10
     },
     inputText: {
-        width: '90%',
+        width: '80%',
         borderRadius: 7,
         marginBottom: 10,
         borderColor: '#264384',
         borderWidth: 1,
-        marginLeft: 17,
-        paddingLeft: 33,
-        fontSize: 22,
+        marginLeft: 8,
+        paddingLeft: 15,
+        fontSize: 18,
         fontFamily: 'Poppins-Regular'
     },
-    icon: {
-        position: 'absolute',
-        left: 20,
-        top: 66
-    },
-    icon2: {
-        position: 'absolute',
-        left: 23,
-        top: 128
+    textContainer: {
+        flexDirection: 'row',
+        paddingHorizontal: 10
     },
     loginBtn: {
         width: '90%',

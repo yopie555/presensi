@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import SplashScreen from './src/screens/Splash'
 import LoginScreen from './src/screens/Login'
 import HomepageScreen from './src/screens/Homepage'
+import HomepageScreen2 from './src/screens/Homepage2'
 import HistoryScreen from './src/screens/History'
 import ProfileScreen from './src/screens/Profile'
 
@@ -16,7 +17,7 @@ const Tab = createBottomTabNavigator();
 const RootHome = () => {
   return (
     <Tab.Navigator
-      initialRouteName="HomepageScreen"
+      initialRouteName="HomepageScreen2"
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color }) => {
           let iconName;
@@ -40,7 +41,7 @@ const RootHome = () => {
         },
       }}
     >
-      <Tab.Screen name="Presensi" component={HomepageScreen} />
+      <Tab.Screen name="Presensi" component={HomepageScreen2} />
       <Tab.Screen name="History" component={HistoryScreen} />
     </Tab.Navigator>
   )

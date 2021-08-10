@@ -23,7 +23,6 @@ const HomePage = () => {
 
     const [welcomeVisible, setWelcomeVisible] = useState(true);
     const [presensiVisible, setPresensiVisible] = useState(false);
-    const [berhasilVisible, setBerhasilVisible] = useState(false);
     return (
         <View style={styles.container}>
             <StatusBar hidden={true} />
@@ -102,7 +101,7 @@ const HomePage = () => {
                         PRESENSI HARI INI
                     </Text>
                 </View>
-                <ScrollView>
+                <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={styles.container8}>
                         <Text style={styles.descriptionText}>Jam Datang</Text>
                         <Text style={styles.detailsText}>00:00:00</Text>

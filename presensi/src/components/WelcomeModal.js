@@ -28,7 +28,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#FFF',
         borderRadius: 5,
-        marginVertical: '90%'
+        marginVertical: '90%',
+        borderWidth: 2,
+        borderColor: '#264384'
     },
     text: {
         textAlign: 'center',

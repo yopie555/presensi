@@ -10,6 +10,7 @@ import HomepageScreen from './src/screens/Homepage'
 import HomepageScreen2 from './src/screens/Homepage2'
 import HistoryScreen from './src/screens/History'
 import ProfileScreen from './src/screens/Profile'
+import PresensiScreen from './src/screens/Presensi'
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -57,6 +58,7 @@ const App = () => {
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="HomepageScreen" component={RootHome} />
         <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+        <Stack.Screen name="PresensiScreen" component={PresensiScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -19,7 +19,7 @@ import PresensiModal from '../components/PresensiModal';
 import Logo2 from '../assets/umrah.png'
 import Background from '../assets/background3.png'
 
-const HomePage = () => {
+const HomePage = ({ navigation }) => {
 
     const [welcomeVisible, setWelcomeVisible] = useState(true);
     const [presensiVisible, setPresensiVisible] = useState(false);
@@ -91,7 +91,8 @@ const HomePage = () => {
                     <TouchableOpacity
                         style={styles.datangButton}
                         onPress={() => {
-                            setPresensiVisible(true)
+                            navigation.navigate("PresensiScreen")
+                            // setPresensiVisible(true)
                         }}>
                         <Text style={styles.datangText}>Presensi Datang</Text>
                     </TouchableOpacity>

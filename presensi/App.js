@@ -3,6 +3,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Provider } from 'react-redux';
+import store from './src/store/index';
 
 import SplashScreen from './src/screens/Splash'
 import LoginScreen from './src/screens/Login'
@@ -11,6 +13,7 @@ import HomepageScreen2 from './src/screens/Homepage2'
 import HistoryScreen from './src/screens/History'
 import ProfileScreen from './src/screens/Profile'
 import PresensiScreen from './src/screens/Presensi'
+import MapsScreen from './src/screens/Maps'
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -52,15 +55,18 @@ const App = () => {
 
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator headerMode="none">
-        <Stack.Screen name="SplashScreen" component={SplashScreen} />
-        <Stack.Screen name="LoginScreen" component={LoginScreen} />
-        <Stack.Screen name="HomepageScreen" component={RootHome} />
-        <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
-        <Stack.Screen name="PresensiScreen" component={PresensiScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator headerMode="none">
+          <Stack.Screen name="SplashScreen" component={SplashScreen} />
+          <Stack.Screen name="LoginScreen" component={LoginScreen} />
+          <Stack.Screen name="HomepageScreen" component={RootHome} />
+          <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+          <Stack.Screen name="PresensiScreen" component={PresensiScreen} />
+          <Stack.Screen name="MapsScreen" component={MapsScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 };
 

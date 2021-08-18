@@ -7,8 +7,14 @@ import {
     ImageBackground,
     StatusBar,
     TextInput,
-    TouchableOpacity
+    TouchableOpacity,
+    ActivityIndicator,
+    ToastAndroid
 } from 'react-native';
+import FormData from 'form-data';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { loginAction } from '../actions/authAction';
 
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -18,9 +24,11 @@ import Logo2 from '../assets/umrah.png'
 import Background from '../assets/background2.png'
 
 const Login = ({ navigation }) => {
-    const [nip, setNip] = useState("");
-    const [password, setPassword] = useState("");
+    const [nip, setNip] = useState("d001");
+    const [password, setPassword] = useState("abc123");
+    const [loading, setLoading] = useState(false)
 
+    const dispatch = useDispatch();
     return (
         <View style={styles.container}>
             <StatusBar hidden={true} />
@@ -67,8 +75,22 @@ const Login = ({ navigation }) => {
                     </View>
                     <TouchableOpacity
                         style={styles.loginBtn}
-                        onPress={() => navigation.navigate("HomepageScreen")}>
-                        <Text style={styles.textLogin}>Masuk</Text>
+                        onPress={async () => {
+                            if (
+                                nip === "" || password === ""
+                            ) { ToastAndroid.show("You Must Fill All Field", 2000) }
+                            else {
+                                setLoading(true)
+                                await dispatch(loginAction({ nip, password }))
+                                setLoading(false)
+                                navigation.navigate("HomepageScreen")
+                            }
+                        }}>
+                        {loading ? <View>
+                            <ActivityIndicator size="large" color="#28df99" />
+                        </View> :
+                            <Text style={styles.textLogin}>Masuk</Text>
+                        }
                     </TouchableOpacity>
                 </View>
             </ImageBackground>
@@ -105,15 +127,15 @@ const styles = StyleSheet.create({
     },
     logo2: {
         position: 'absolute',
-        width: 165,
-        height: 50,
-        top: 15,
-        right: 5
+        width: 45,
+        height: 55,
+        top: 0,
+        right: 8
     },
     text: {
         fontSize: 27,
         color: '#FFF',
-        fontFamily: 'Poppins-SemiBold',
+        fontFamily: 'Serifa-BT',
         marginBottom: 10
     },
     inputText: {
@@ -125,7 +147,7 @@ const styles = StyleSheet.create({
         marginLeft: 8,
         paddingLeft: 15,
         fontSize: 18,
-        fontFamily: 'Poppins-Regular'
+        fontFamily: 'Serifa-BT'
     },
     textContainer: {
         flexDirection: 'row',
@@ -144,7 +166,7 @@ const styles = StyleSheet.create({
     textLogin: {
         color: '#fff',
         fontSize: 22,
-        fontFamily: 'Poppins-Regular'
+        fontFamily: 'Serifa-BT'
     },
 })
 export default Login;

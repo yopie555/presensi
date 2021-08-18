@@ -11,7 +11,7 @@ import LoginScreen from './src/screens/Login'
 import HomepageScreen from './src/screens/Homepage'
 import HomepageScreen2 from './src/screens/Homepage2'
 import HistoryScreen from './src/screens/History'
-import ProfileScreen from './src/screens/Profile'
+import RiwayatScreen from './src/screens/Riwayat'
 import PresensiScreen from './src/screens/Presensi'
 import MapsScreen from './src/screens/Maps'
 
@@ -61,7 +61,7 @@ const App = () => {
           <Stack.Screen name="SplashScreen" component={SplashScreen} />
           <Stack.Screen name="LoginScreen" component={LoginScreen} />
           <Stack.Screen name="HomepageScreen" component={RootHome} />
-          <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+          <Stack.Screen name="RiwayatScreen" component={RiwayatScreen} />
           <Stack.Screen name="PresensiScreen" component={PresensiScreen} />
           <Stack.Screen name="MapsScreen" component={MapsScreen} />
         </Stack.Navigator>

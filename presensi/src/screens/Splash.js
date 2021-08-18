@@ -3,6 +3,8 @@ import { Text, View, Image, StyleSheet, ImageBackground, StatusBar } from 'react
 
 import Logo from '../assets/presensi.png'
 import Logo2 from '../assets/umrah.png'
+import Logo3 from '../assets/kemendikbud.png'
+import Logo4 from '../assets/satuGurindam.png'
 import Background from '../assets/background.png'
 
 function SplashScreen({ navigation }) {
@@ -19,6 +21,14 @@ function SplashScreen({ navigation }) {
                 <Image
                     source={Logo2}
                     style={styles.logo}
+                />
+                <Image
+                    source={Logo3}
+                    style={styles.logo2}
+                />
+                <Image
+                    source={Logo4}
+                    style={styles.logo3}
                 />
                 <View style={styles.subContainer}>
 
@@ -60,14 +70,28 @@ const styles = StyleSheet.create({
     text: {
         color: '#FFF',
         fontSize: 22,
-        fontFamily: 'Poppins-Regular'
+        fontFamily: 'Serifa-Bold-BT'
     },
     logo: {
         position: 'absolute',
-        width: 165,
-        height: 50,
-        top: 15,
-        right: 5
+        width: 45,
+        height: 55,
+        top: 0,
+        right: 8
+    },
+    logo2: {
+        position: 'absolute',
+        width: 45,
+        height: 45,
+        top: 8,
+        right: 60
+    },
+    logo3: {
+        position: 'absolute',
+        width: 117,
+        height: 71,
+        top: 28,
+        right: -5
     }
 })
 

@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
         padding: 5,
         margin: '5%',
         color: '#264384',
-        fontFamily: 'Poppins-Regular',
+        fontFamily: 'Serifa-BT',
         fontSize: 18
     },
     icon: {

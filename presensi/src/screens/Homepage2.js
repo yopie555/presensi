@@ -92,7 +92,6 @@ const HomePage = ({ navigation }) => {
                         style={styles.datangButton}
                         onPress={() => {
                             navigation.navigate("PresensiScreen")
-                            // setPresensiVisible(true)
                         }}>
                         <Text style={styles.datangText}>Presensi Datang</Text>
                     </TouchableOpacity>
@@ -172,30 +171,30 @@ const styles = StyleSheet.create({
     },
     logo2: {
         position: 'absolute',
-        width: 165,
-        height: 50,
-        top: 15,
-        right: 5
+        width: 45,
+        height: 55,
+        top: 0,
+        right: 8
     },
     header: {
         color: '#264384',
-        fontFamily: 'Poppins-SemiBold',
+        fontFamily: 'Serifa-BT',
         fontSize: 22,
         textAlign: 'center'
     },
     text: {
         color: '#264384',
-        fontFamily: 'Poppins-SemiBold'
+        fontFamily: 'Serifa-BT'
     },
     text1: {
         color: '#264384',
-        fontFamily: 'Poppins-SemiBold',
+        fontFamily: 'Serifa-BT',
         fontSize: 14,
         textAlign: 'center'
     },
     text2: {
         color: '#264384',
-        fontFamily: 'Poppins-SemiBold',
+        fontFamily: 'Serifa-BT',
         fontSize: 24,
         textAlign: 'center'
     },

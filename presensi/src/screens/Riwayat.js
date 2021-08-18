@@ -1,10 +1,10 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
-const Profile = () => (
+const Riwayat = () => (
     <View>
-        <Text>Profile</Text>
+        <Text>Riwayat</Text>
     </View>
 );
 
-export default Profile;
+export default Riwayat;

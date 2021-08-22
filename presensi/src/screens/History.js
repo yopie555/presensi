@@ -153,7 +153,7 @@ const History = ({ navigation }) => {
                     <View style={styles.container4}>
                         <TextInput
                             style={styles.inputText}
-                            onChangeText={(date) => setDate2(date)}
+                            onChangeText={(date2) => setDate2(date2)}
                             value={text2}
                         />
                         <TouchableOpacity

@@ -19,8 +19,7 @@ import { addressAction } from '../actions/addressAction'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import FormData from 'form-data';
-import { datangAction } from '../actions/datangAction';
-import { presensiAction } from '../actions/presensiAction';
+import { datangAction, pulangAction } from '../actions/datangAction';
 
 import Logo2 from '../assets/umrah.png'
 import Background from '../assets/background4.png'
@@ -34,16 +33,17 @@ const presensi = ({ navigation }) => {
     const [photo, setPhoto] = useState(null)
     const [rencana, setRencana] = useState("");
     const [loading, setLoading] = useState(false)
-    const dispatch = useDispatch();
     const submitPresensiD = () => {
         const data = new FormData();
         data.append('file', { ...photo });
         data.append('username', user.auth.nip);
-        data.append('lokasi_datang', thisAddress.address.place_name);
-        data.append('rencana_kerja', rencana);
-        dispatch(datangAction({ data, token: user.auth.token }));
+        data.append('lokasi_pulang', thisAddress.address.place_name);
+        data.append('realisasi_kerja', rencana);
+        dispatch(pulangAction({ data, token: user.auth.token }));
     };
 
+
+    const dispatch = useDispatch();
     const address = () => {
         dispatch(addressAction({ latitude: lat, longitude: long }))
     }
@@ -179,10 +179,7 @@ const presensi = ({ navigation }) => {
                         <View style={styles.container9}>
                             <TouchableOpacity
                                 style={styles.datangButton}
-                                onPress={async () => {
-                                    setLoading(true)
-                                    await dispatch(presensiAction({ token: user.auth.token, nip: user.auth.nip }));
-                                    setLoading(false)
+                                onPress={() => {
                                     navigation.navigate("HomepageScreen")
                                 }}>
                                 <Text style={styles.datangText}>Tutup</Text>

@@ -24,7 +24,7 @@ import Logo2 from '../assets/umrah.png'
 import Background from '../assets/background2.png'
 
 const Login = ({ navigation }) => {
-    const [nip, setNip] = useState("d001");
+    const [nip, setNip] = useState("20210803");
     const [password, setPassword] = useState("abc123");
     const [loading, setLoading] = useState(false)
 

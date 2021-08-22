@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Text,
     View,
@@ -8,21 +8,47 @@ import {
     StatusBar,
     TouchableOpacity,
     ScrollView,
-    Modal
+    Modal,
+    Button
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 import WelcomeModal from '../components/WelcomeModal';
 import PresensiModal from '../components/PresensiModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { profileAction } from '../actions/profileAction';
+import { presensiAction } from '../actions/presensiAction';
+import { timeAction } from '../actions/timeAction';
 
 import Logo2 from '../assets/umrah.png'
 import Background from '../assets/background3.png'
 
+
+
 const HomePage = ({ navigation }) => {
 
     const [welcomeVisible, setWelcomeVisible] = useState(true);
-    const [presensiVisible, setPresensiVisible] = useState(false);
+    const dispatch = useDispatch();
+    const user = useSelector((state) => state.auth);
+    const profile = useSelector((state) => state.profile)
+    const presensi = useSelector((state) => state.presensi)
+    const time = useSelector((state) => state.time)
+    console.log('user', time.time.cek_dtg);
+
+    useEffect(() => {
+        dispatch(profileAction({ token: user.auth.token, nip: user.auth.nip }));
+    }, []);
+
+    useEffect(() => {
+        dispatch(presensiAction({ token: user.auth.token, nip: user.auth.nip }));
+    }, []);
+
+    useEffect(() => {
+        dispatch(timeAction({ token: user.auth.token, nip: user.auth.nip }));
+    }, []);
+
+
     return (
         <View style={styles.container}>
             <StatusBar hidden={true} />
@@ -35,17 +61,6 @@ const HomePage = ({ navigation }) => {
                 }}>
                 <View style={styles.welcomeModal}>
                     <WelcomeModal setWelcomeVisible={setWelcomeVisible} />
-                </View>
-            </Modal>
-            <Modal
-                animationType="slide"
-                transparent={true}
-                visible={presensiVisible}
-                onRequestClose={() => {
-                    setPresensiVisible(false);
-                }}>
-                <View style={styles.welcomeModal}>
-                    <PresensiModal setPresensiVisible={setPresensiVisible} />
                 </View>
             </Modal>
 
@@ -62,11 +77,11 @@ const HomePage = ({ navigation }) => {
                         color={"#264384"}
                     />
                     <Text style={styles.text}>
-                        Ardiansyah
+                        {profile.profile.Name}
                         {'\n'}
-                        NIP : 01234567890
+                        NIP : {user.auth.nip}
                         {'\n'}
-                        Tenaga Dalam
+                        {profile.profile.Unit}
                     </Text>
                     <TouchableOpacity
                         style={styles.btn1}
@@ -87,15 +102,6 @@ const HomePage = ({ navigation }) => {
                         />
                     </TouchableOpacity>
                 </View>
-                <View style={styles.container9}>
-                    <TouchableOpacity
-                        style={styles.datangButton}
-                        onPress={() => {
-                            navigation.navigate("PresensiScreen")
-                        }}>
-                        <Text style={styles.datangText}>Presensi Datang</Text>
-                    </TouchableOpacity>
-                </View>
                 <View style={styles.container4}>
                     <Text style={styles.header}>
                         PRESENSI HARI INI
@@ -104,21 +110,44 @@ const HomePage = ({ navigation }) => {
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={styles.container8}>
                         <Text style={styles.descriptionText}>Jam Datang</Text>
-                        <Text style={styles.detailsText}>00:00:00</Text>
+                        <Text style={styles.detailsText}>{presensi.presensi.ScanIn}</Text>
                         <Text style={styles.descriptionText}>Lokasi Datang</Text>
-                        <Text style={styles.detailsText}>Aplikasi</Text>
+                        <Text style={styles.detailsText}>{presensi.presensi.SN_IN}</Text>
                         <Text style={styles.descriptionText}>Rencana Kerja</Text>
-                        <Text style={styles.detailsText}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</Text>
+                        <Text style={styles.detailsText}>{presensi.presensi.Rencana_kerja}</Text>
                     </View>
                     <View style={styles.container8}>
                         <Text style={styles.descriptionText}>Jam Datang</Text>
-                        <Text style={styles.detailsText}>00:00:00</Text>
+                        <Text style={styles.detailsText}>{presensi.presensi.ScanOut}</Text>
                         <Text style={styles.descriptionText}>Lokasi Datang</Text>
-                        <Text style={styles.detailsText}>Aplikasi</Text>
+                        <Text style={styles.detailsText}>{presensi.presensi.SN_OUT}</Text>
                         <Text style={styles.descriptionText}>Rencana Kerja</Text>
-                        <Text style={styles.detailsText}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</Text>
+                        <Text style={styles.detailsText}>{presensi.presensi.Realisasi_kerja}</Text>
                     </View>
                 </ScrollView>
+                <View style={styles.container9}>
+                    {/* <TouchableOpacity
+                        style={styles.datangButton}
+                        onPress={() => {
+                            navigation.navigate("PresensiScreen")
+                        }}>
+                        <Text style={styles.datangText}>Presensi Datang</Text>
+                    </TouchableOpacity> */}
+                    <Button
+                        title={"Presensi Datang"}
+                        onPress={() => navigation.navigate("PresensiScreen")}
+                        style={styles.datangButton}
+                        disabled={time.time.cek_dtg == 0 ? true : false}
+                        color={'#66C57A'}
+                    />
+                    <Button
+                        title={"Presensi Pulang"}
+                        onPress={() => navigation.navigate("PresensiScreen2")}
+                        style={styles.datangButton}
+                        disabled={time.time.cek_plg == 0 ? true : false}
+                        color={'#EE9D52'}
+                    />
+                </View>
             </ImageBackground>
         </View>
     );
@@ -154,8 +183,11 @@ const styles = StyleSheet.create({
     },
     container9: {
         marginTop: 5,
-        width: '98%',
-        alignItems: 'center'
+        width: '100%',
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        marginVertical: 10
     },
     welcomeModal: {
         alignItems: 'center',
@@ -225,14 +257,7 @@ const styles = StyleSheet.create({
         right: 13
     },
     datangButton: {
-        width: '90%',
-        borderRadius: 7,
-        backgroundColor: '#28df99',
-        alignItems: 'center',
-        padding: 10,
-        marginBottom: 10,
-        borderColor: '#28df99',
-        borderWidth: 1,
+        width: wp('90%'),
     },
     datangText: {
         fontSize: 16,

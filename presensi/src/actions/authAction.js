@@ -18,7 +18,6 @@ export const getLoginFailure = (error) => ({
 });
 
 export const loginAction = (value) => {
-    console.log('value', value);
 
     return async (dispatch) => {
         try {
@@ -36,7 +35,6 @@ export const loginAction = (value) => {
                     },
                 }
             );
-            console.log('ini res search', res.data.result.token,);
             await AsyncStorage.setItem('tok', res.data.result.token,);
             await AsyncStorage.setItem('nip', value.nip);
             dispatch(getLoginSuccess({ token: res.data.result.token, nip: value.nip }));

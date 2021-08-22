@@ -13,6 +13,7 @@ import HomepageScreen2 from './src/screens/Homepage2'
 import HistoryScreen from './src/screens/History'
 import RiwayatScreen from './src/screens/Riwayat'
 import PresensiScreen from './src/screens/Presensi'
+import PresensiScreen2 from './src/screens/Presensi2'
 import MapsScreen from './src/screens/Maps'
 
 const Stack = createStackNavigator();
@@ -63,6 +64,7 @@ const App = () => {
           <Stack.Screen name="HomepageScreen" component={RootHome} />
           <Stack.Screen name="RiwayatScreen" component={RiwayatScreen} />
           <Stack.Screen name="PresensiScreen" component={PresensiScreen} />
+          <Stack.Screen name="PresensiScreen2" component={PresensiScreen2} />
           <Stack.Screen name="MapsScreen" component={MapsScreen} />
         </Stack.Navigator>
       </NavigationContainer>

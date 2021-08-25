@@ -9,17 +9,19 @@ import {
     TouchableOpacity,
     ScrollView,
     Modal,
-    Button
+    Button,
+    ActivityIndicator
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-
+import Header from '../components/Header';
 import WelcomeModal from '../components/WelcomeModal';
 import PresensiModal from '../components/PresensiModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { profileAction } from '../actions/profileAction';
 import { presensiAction } from '../actions/presensiAction';
 import { timeAction } from '../actions/timeAction';
+import { BASE_URL } from '../constants/general';
 
 import Logo2 from '../assets/umrah.png'
 import Background from '../assets/background3.png'
@@ -34,20 +36,30 @@ const HomePage = ({ navigation }) => {
     const profile = useSelector((state) => state.profile)
     const presensi = useSelector((state) => state.presensi)
     const time = useSelector((state) => state.time)
-    console.log('user', time.time.cek_dtg);
+    const [profileVisible, setProfileVisible] = useState(false);
+    const [profileVisible2, setProfileVisible2] = useState(false);
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         dispatch(profileAction({ token: user.auth.token, nip: user.auth.nip }));
     }, []);
 
-    useEffect(() => {
-        dispatch(presensiAction({ token: user.auth.token, nip: user.auth.nip }));
+    useEffect(async () => {
+        await dispatch(presensiAction({ token: user.auth.token, nip: user.auth.nip }));
+        setLoading(false)
     }, []);
 
     useEffect(() => {
         dispatch(timeAction({ token: user.auth.token, nip: user.auth.nip }));
     }, []);
 
+    if (loading == true) {
+        return (
+            <View style={styles.loading}>
+                <ActivityIndicator size="large" color="#DAC34D" />
+            </View>
+        );
+    }
 
     return (
         <View style={styles.container}>
@@ -63,45 +75,41 @@ const HomePage = ({ navigation }) => {
                     <WelcomeModal setWelcomeVisible={setWelcomeVisible} />
                 </View>
             </Modal>
-
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={profileVisible}
+                onRequestClose={() => {
+                    setProfileVisible(false);
+                }}>
+                <View style={styles.modalContainerImage}>
+                    <Image
+                        style={styles.modalImage}
+                        source={{ uri: `${BASE_URL}/${presensi.presensi.Foto_plg}` }}
+                    />
+                </View>
+            </Modal>
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={profileVisible2}
+                onRequestClose={() => {
+                    setProfileVisible2(false);
+                }}>
+                <View style={styles.modalContainerImage}>
+                    <Image
+                        style={styles.modalImage}
+                        source={{ uri: `${BASE_URL}/${presensi.presensi.Foto_dtg}` }}
+                    />
+                </View>
+            </Modal>
             <ImageBackground
                 source={Background}
                 style={styles.background}>
                 <Image
                     source={Logo2}
                     style={styles.logo2} />
-                <View style={styles.container2}>
-                    <Icon
-                        name='account-circle-outline'
-                        size={90}
-                        color={"#264384"}
-                    />
-                    <Text style={styles.text}>
-                        {profile.profile.Name}
-                        {'\n'}
-                        NIP : {user.auth.nip}
-                        {'\n'}
-                        {profile.profile.Unit}
-                    </Text>
-                    <TouchableOpacity
-                        style={styles.btn1}
-                    >
-                        <Icon
-                            name='key-variant'
-                            size={28}
-                            color={"#fff"}
-                        />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.btn2}
-                    >
-                        <Icon
-                            name='logout'
-                            size={28}
-                            color={"#fff"}
-                        />
-                    </TouchableOpacity>
-                </View>
+                <Header />
                 <View style={styles.container4}>
                     <Text style={styles.header}>
                         PRESENSI HARI INI
@@ -115,38 +123,50 @@ const HomePage = ({ navigation }) => {
                         <Text style={styles.detailsText}>{presensi.presensi.SN_IN}</Text>
                         <Text style={styles.descriptionText}>Rencana Kerja</Text>
                         <Text style={styles.detailsText}>{presensi.presensi.Rencana_kerja}</Text>
+                        <Button
+                            title={"lihat Foto"}
+                            onPress={() => {
+                                setProfileVisible2(true)
+                            }}
+                            color={"#264384"}
+                        />
                     </View>
                     <View style={styles.container8}>
                         <Text style={styles.descriptionText}>Jam Datang</Text>
                         <Text style={styles.detailsText}>{presensi.presensi.ScanOut}</Text>
-                        <Text style={styles.descriptionText}>Lokasi Datang</Text>
+                        <Text style={styles.descriptionText}>Lokasi Pulang</Text>
                         <Text style={styles.detailsText}>{presensi.presensi.SN_OUT}</Text>
-                        <Text style={styles.descriptionText}>Rencana Kerja</Text>
+                        <Text style={styles.descriptionText}>Realisasi Kerja</Text>
                         <Text style={styles.detailsText}>{presensi.presensi.Realisasi_kerja}</Text>
+                        <Button
+                            title={"lihat Foto"}
+                            onPress={() => {
+                                setProfileVisible(true)
+                            }}
+                            color={"#264384"}
+                        />
                     </View>
                 </ScrollView>
                 <View style={styles.container9}>
-                    {/* <TouchableOpacity
-                        style={styles.datangButton}
-                        onPress={() => {
-                            navigation.navigate("PresensiScreen")
-                        }}>
-                        <Text style={styles.datangText}>Presensi Datang</Text>
-                    </TouchableOpacity> */}
                     <Button
                         title={"Presensi Datang"}
                         onPress={() => navigation.navigate("PresensiScreen")}
                         style={styles.datangButton}
-                        disabled={time.time.cek_dtg == 0 ? true : false}
+                        disabled={time.time.cek_dtg == 0 || presensi.presensi.SN_IN !== null ? true : false}
                         color={'#66C57A'}
                     />
                     <Button
                         title={"Presensi Pulang"}
                         onPress={() => navigation.navigate("PresensiScreen2")}
                         style={styles.datangButton}
-                        disabled={time.time.cek_plg == 0 ? true : false}
+                        disabled={time.time.cek_plg == 0 || presensi.presensi.SN_OUT !== null ? true : false}
                         color={'#EE9D52'}
                     />
+                    {/* <TouchableOpacity
+                    onPress={() => navigation.navigate("PresensiScreen")}
+                    >
+                        <Text>Presensi Datang</Text>
+                    </TouchableOpacity> */}
                 </View>
             </ImageBackground>
         </View>
@@ -156,6 +176,12 @@ const HomePage = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+    },
+    loading: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#264384',
     },
     container2: {
         width: '100%',
@@ -171,7 +197,7 @@ const styles = StyleSheet.create({
         // borderWidth: 1,
         borderRadius: 5,
         marginHorizontal: 10,
-        marginBottom: 5
+        marginVertical: 5
     },
     container8: {
         borderWidth: 1,
@@ -263,6 +289,17 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
         color: 'white',
+    },
+    modalContainerImage: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1,
+        backgroundColor: '#264384',
+    },
+    modalImage: {
+        width: '100%',
+        height: null,
+        aspectRatio: 1,
     },
 })
 

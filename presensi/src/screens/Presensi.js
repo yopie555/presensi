@@ -9,7 +9,10 @@ import {
     ImageBackground,
     TouchableOpacity,
     TextInput,
-    ScrollView
+    ScrollView,
+    ToastAndroid,
+    Modal,
+    ActivityIndicator
 } from 'react-native';
 import moment from 'moment';
 import GetLocation from 'react-native-get-location'
@@ -21,6 +24,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import FormData from 'form-data';
 import { datangAction } from '../actions/datangAction';
 import { presensiAction } from '../actions/presensiAction';
+import BerhasilModal from '../components/PresensiBerhasil'
 
 import Logo2 from '../assets/umrah.png'
 import Background from '../assets/background4.png'
@@ -34,6 +38,7 @@ const presensi = ({ navigation }) => {
     const [photo, setPhoto] = useState(null)
     const [rencana, setRencana] = useState("");
     const [loading, setLoading] = useState(false)
+    const [berhasilVisible, setBerhasilVisible] = useState(false);
     const dispatch = useDispatch();
     const submitPresensiD = () => {
         const data = new FormData();
@@ -107,6 +112,17 @@ const presensi = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <StatusBar hidden={true} />
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={berhasilVisible}
+                onRequestClose={() => {
+                    setBerhasilVisible(false);
+                }}>
+                <View style={styles.welcomeModal}>
+                    <BerhasilModal setBerhasilVisible={setBerhasilVisible} />
+                </View>
+            </Modal>
             <ImageBackground
                 source={Background}
                 style={styles.background}>
@@ -190,9 +206,21 @@ const presensi = ({ navigation }) => {
                             <TouchableOpacity
                                 style={styles.datangButton2}
                                 onPress={async () => {
-                                    setLoading(true)
-                                    await submitPresensiD()
-                                    setLoading(false)
+                                    if (
+                                        photo === null
+                                    ) { ToastAndroid.show("Silahkan Ambil Gambar Terlebih Dahulu", 2000) }
+                                    else if (
+                                        thisAddress.address.place_name === ""
+                                    ) { ToastAndroid.show("Silahkan Tekan Button Alamat Terlebih Dahulu", 2000) }
+                                    else if (
+                                        rencana === ""
+                                    ) { ToastAndroid.show("Silahkan Isi Rencana Kinerja Terlebih Dahulu", 2000) }
+                                    else {
+                                        setLoading(true)
+                                        await submitPresensiD()
+                                        setLoading(false)
+                                        setBerhasilVisible(true)
+                                    }
                                 }}>
                                 <Text style={styles.datangText}>Simpan</Text>
                             </TouchableOpacity>
@@ -381,6 +409,11 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
         color: 'white',
+    },
+    welcomeModal: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginHorizontal: '15%'
     },
 })
 export default presensi;

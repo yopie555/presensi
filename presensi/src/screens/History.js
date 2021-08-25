@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Text,
     View,
@@ -9,28 +9,36 @@ import {
     TouchableOpacity,
     ScrollView,
     Modal,
-    TextInput
+    TextInput,
+    ToastAndroid
 } from 'react-native';
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon2 from 'react-native-vector-icons/MaterialIcons';
+import { historyAction } from '../actions/historyAction';
+import { useDispatch, useSelector } from 'react-redux';
 
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 import Logo2 from '../assets/umrah.png'
 import Background from '../assets/background3.png'
-
+import Header from '../components/Header';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const History = ({ navigation }) => {
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
-    const [text, setText] = useState('dd/mm/yyyy')
+    const [text, setText] = useState('')
     const [date2, setDate2] = useState(new Date());
     const [mode2, setMode2] = useState('date');
     const [show2, setShow2] = useState(false);
-    const [text2, setText2] = useState('dd/mm/yyyy')
+    const [text2, setText2] = useState('')
+    const [loading, setLoading] = useState(false)
+    const dispatch = useDispatch();
+
+    const user = useSelector((state) => state.auth);
+    const profile = useSelector((state) => state.profile)
 
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
@@ -39,7 +47,7 @@ const History = ({ navigation }) => {
 
         // Process the date values
         let tempDate = new Date(currentDate);
-        let fDate = tempDate.getDate() + '/' + (tempDate.getMonth() + 1) + '/' + tempDate.getFullYear();
+        let fDate = tempDate.getFullYear() + '-' + (tempDate.getMonth() + 1) + '-' + tempDate.getDate();
         let fTime = 'Hours: ' + tempDate.getHours() + ' | Minutes: ' + tempDate.getMinutes()
         setText(fDate)
 
@@ -60,7 +68,7 @@ const History = ({ navigation }) => {
 
         // Process the date values
         let tempDate2 = new Date(currentDate2);
-        let fDate2 = tempDate2.getDate() + '/' + (tempDate2.getMonth() + 1) + '/' + tempDate2.getFullYear();
+        let fDate2 = tempDate2.getFullYear() + '-' + (tempDate2.getMonth() + 1) + '-' + tempDate2.getDate();;
         let fTime2 = 'Hours: ' + tempDate2.getHours() + ' | Minutes: ' + tempDate2.getMinutes()
         setText2(fDate2)
 
@@ -81,41 +89,9 @@ const History = ({ navigation }) => {
                 <Image
                     source={Logo2}
                     style={styles.logo2} />
-                <View style={styles.container2}>
-                    <Icon
-                        name='account-circle-outline'
-                        size={90}
-                        color={"#264384"}
-                    />
-                    <Text style={styles.text}>
-                        Ardiansyah
-                        {'\n'}
-                        NIP : 01234567890
-                        {'\n'}
-                        Tenaga Dalam
-                    </Text>
-                    <TouchableOpacity
-                        style={styles.btn1}
-                    >
-                        <Icon
-                            name='key-variant'
-                            size={28}
-                            color={"#fff"}
-                        />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.btn2}
-                    >
-                        <Icon
-                            name='logout'
-                            size={28}
-                            color={"#fff"}
-                        />
-                    </TouchableOpacity>
-                </View>
-                {/* <Calendar/> */}
+                <Header />
                 <View style={styles.container3}>
-                    <Text style={styles.tectHistory}>
+                    <Text style={styles.textHistory}>
                         Masukkan tanggal awal dan akhir, lalu tekan tombol cari untuk menampilkan riwayat presensi
                     </Text>
                 </View>
@@ -126,6 +102,7 @@ const History = ({ navigation }) => {
                             style={styles.inputText}
                             onChangeText={(date) => setDate(date)}
                             value={text}
+                            placeholder={"YYYY-MM-DD"}
                         />
                         <TouchableOpacity
                             style={styles.calendar}
@@ -155,6 +132,7 @@ const History = ({ navigation }) => {
                             style={styles.inputText}
                             onChangeText={(date2) => setDate2(date2)}
                             value={text2}
+                            placeholder={"YYYY-MM-DD"}
                         />
                         <TouchableOpacity
                             style={styles.calendar}
@@ -180,15 +158,23 @@ const History = ({ navigation }) => {
                     </View>
                     <TouchableOpacity
                         style={styles.datangButton}
-                        onPress={() => {
-                            navigation.navigate("RiwayatScreen")
+                        onPress={async () => {
+                            if (text === "" || text2 === "") {
+                                ToastAndroid.show("Isi Tanggal Dengan Menekan Icon Calender", 2000)
+                            }
+                            else {
+                                setLoading(true)
+                                await dispatch(historyAction({ token: user.auth.token, nip: user.auth.nip, text, text2 }))
+                                setLoading(false)
+                                navigation.navigate("RiwayatScreen", { text, text2 })
+                            }
                         }}>
                         <Icon2
                             name="search"
                             size={30}
                             color="white"
                         />
-                        <Text style={styles.datangText}>Cari RIwayat</Text>
+                        <Text style={styles.datangText}>Cari Riwayat</Text>
                     </TouchableOpacity>
                 </View>
             </ImageBackground>
@@ -289,7 +275,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontFamily: 'Poppins-Regular'
     },
-    tectHistory: {
+    textHistory: {
         textAlign: 'center'
     },
     datangButton: {

@@ -9,7 +9,10 @@ import {
     ImageBackground,
     TouchableOpacity,
     TextInput,
-    ScrollView
+    ScrollView,
+    ToastAndroid,
+    Modal,
+    ActivityIndicator
 } from 'react-native';
 import moment from 'moment';
 import GetLocation from 'react-native-get-location'
@@ -20,6 +23,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import FormData from 'form-data';
 import { datangAction, pulangAction } from '../actions/datangAction';
+import BerhasilModal from '../components/PresensiBerhasil'
 
 import Logo2 from '../assets/umrah.png'
 import Background from '../assets/background4.png'
@@ -33,6 +37,7 @@ const presensi = ({ navigation }) => {
     const [photo, setPhoto] = useState(null)
     const [rencana, setRencana] = useState("");
     const [loading, setLoading] = useState(false)
+    const [berhasilVisible, setBerhasilVisible] = useState(false);
     const submitPresensiD = () => {
         const data = new FormData();
         data.append('file', { ...photo });
@@ -107,6 +112,17 @@ const presensi = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <StatusBar hidden={true} />
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={berhasilVisible}
+                onRequestClose={() => {
+                    setBerhasilVisible(false);
+                }}>
+                <View style={styles.welcomeModal}>
+                    <BerhasilModal setBerhasilVisible={setBerhasilVisible} />
+                </View>
+            </Modal>
             <ImageBackground
                 source={Background}
                 style={styles.background}>
@@ -117,7 +133,7 @@ const presensi = ({ navigation }) => {
                 <View style={styles.container2}>
 
                     <View style={styles.container3}>
-                        <Text style={styles.textTitle}>Presensi Datang</Text>
+                        <Text style={styles.textTitle}>Presensi Pulang</Text>
                     </View>
                     <View style={styles.container5}>
                         <Text style={styles.textJam}>Jam Server : {CurrentTime}</Text>
@@ -167,19 +183,22 @@ const presensi = ({ navigation }) => {
                     </View>
                     <ScrollView style={styles.container8}>
                         <Text style={styles.textTitle2}>
-                            Rencana Kinerja Hari Ini
+                            Realisasi Kerja Hari Ini
                         </Text>
                         <TextInput
                             style={styles.inputText2}
                             onChangeText={(rencana) => setRencana(rencana)}
                             value={rencana}
-                            placeholder="Rencana Keja Hari Ini"
+                            placeholder="Realisasi Kerja Hari Ini"
                             multiline
                         />
                         <View style={styles.container9}>
                             <TouchableOpacity
                                 style={styles.datangButton}
-                                onPress={() => {
+                                onPress={async () => {
+                                    setLoading(true)
+                                    await dispatch(presensiAction({ token: user.auth.token, nip: user.auth.nip }));
+                                    setLoading(false)
                                     navigation.navigate("HomepageScreen")
                                 }}>
                                 <Text style={styles.datangText}>Tutup</Text>
@@ -187,9 +206,21 @@ const presensi = ({ navigation }) => {
                             <TouchableOpacity
                                 style={styles.datangButton2}
                                 onPress={async () => {
-                                    setLoading(true)
-                                    await submitPresensiD()
-                                    setLoading(false)
+                                    if (
+                                        photo === null
+                                    ) { ToastAndroid.show("Silahkan Ambil Gambar Terlebih Dahulu", 2000) }
+                                    else if (
+                                        thisAddress.address.place_name === ""
+                                    ) { ToastAndroid.show("Silahkan Tekan Button Alamat Terlebih Dahulu", 2000) }
+                                    else if (
+                                        rencana === ""
+                                    ) { ToastAndroid.show("Silahkan Isi Rencana Kinerja Terlebih Dahulu", 2000) }
+                                    else {
+                                        setLoading(true)
+                                        await submitPresensiD()
+                                        setLoading(false)
+                                        setBerhasilVisible(true)
+                                    }
                                 }}>
                                 <Text style={styles.datangText}>Simpan</Text>
                             </TouchableOpacity>

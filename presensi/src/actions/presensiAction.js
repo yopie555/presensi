@@ -17,7 +17,7 @@ export const getPresensiFailure = (error) => ({
 });
 
 export const presensiAction = (value) => {
-    console.log('value', value);
+    // console.log('value', value);
 
     return async (dispatch) => {
         try {

@@ -2,36 +2,31 @@ import * as types from '../constants/general';
 
 const initialState = {
     loading: false,
-    auth: [],
+    history: [],
     error: null,
 };
 
-function addressReducer(state = initialState, action) {
+function historyReducer(state = initialState, action) {
     switch (action.type) {
-        case types.LOGIN_REQUEST:
-            console.log('req');
+        case types.HISTORY_REQUEST:
+            // console.log('req');
             return Object.assign({}, state, {
                 loading: true,
             });
-        case types.LOGIN_SUCCESS:
-            console.log('reducers', action.payload);
+        case types.HISTORY_SUCCESS:
+            // console.log('reducers', action.payload);
             return Object.assign({}, state, {
                 loading: false,
-                auth: action.payload,
+                history: action.payload,
             });
-        case types.LOGIN_FAILURE:
+        case types.HISTORY_FAILURE:
             return Object.assign({}, state, {
                 loading: false,
                 error: action.error,
-            });
-        case types.LOGOUT_SUCCESS:
-            return Object.assign({}, state, {
-                loading: false,
-                auth: '',
             });
         default:
             return state;
     }
 }
 
-export default addressReducer;
+export default historyReducer;

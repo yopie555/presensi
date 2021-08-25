@@ -37,10 +37,24 @@ export const loginAction = (value) => {
             );
             await AsyncStorage.setItem('tok', res.data.result.token,);
             await AsyncStorage.setItem('nip', value.nip);
-            dispatch(getLoginSuccess({ token: res.data.result.token, nip: value.nip }));
+            await AsyncStorage.setItem('pass', value.password);
+            dispatch(getLoginSuccess({ token: res.data.result.token, nip: value.nip, password: value.password }));
         } catch (error) {
             console.log('Get Address Error', error.response.data);
             dispatch(getLoginFailure(error));
         }
+    };
+};
+
+export const logoutSuccess = (payload) => {
+    return {
+        type: types.LOGOUT_SUCCESS,
+        payload,
+    };
+};
+
+export const logoutAction = () => {
+    return async (dispatch) => {
+        dispatch(logoutSuccess());
     };
 };

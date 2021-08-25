@@ -14,7 +14,7 @@ import HistoryScreen from './src/screens/History'
 import RiwayatScreen from './src/screens/Riwayat'
 import PresensiScreen from './src/screens/Presensi'
 import PresensiScreen2 from './src/screens/Presensi2'
-import MapsScreen from './src/screens/Maps'
+import ResetScreen from './src/screens/Reset'
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -65,7 +65,7 @@ const App = () => {
           <Stack.Screen name="RiwayatScreen" component={RiwayatScreen} />
           <Stack.Screen name="PresensiScreen" component={PresensiScreen} />
           <Stack.Screen name="PresensiScreen2" component={PresensiScreen2} />
-          <Stack.Screen name="MapsScreen" component={MapsScreen} />
+          <Stack.Screen name="ResetScreen" component={ResetScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

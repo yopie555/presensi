@@ -52,7 +52,7 @@ const Header = () => {
                 style={styles.btn2}
                 onPress={async () => {
                     removeValue();
-                    dispatch(logoutAction());
+                    await dispatch(logoutAction());
                 }}
             >
                 <Icon

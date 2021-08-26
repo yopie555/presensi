@@ -46,15 +46,30 @@ export const loginAction = (value) => {
     };
 };
 
-export const logoutSuccess = (payload) => {
+export const logoutSuccess = (logout) => {
     return {
         type: types.LOGOUT_SUCCESS,
-        payload,
+        payload: logout
     };
 };
 
 export const logoutAction = () => {
     return async (dispatch) => {
         dispatch(logoutSuccess());
+    };
+};
+
+export const checkLogin = () => {
+    return async (dispatch) => {
+        try {
+            const value = await AsyncStorage.getItem('tok');
+            const value2 = await AsyncStorage.getItem('nip');
+            const value3 = await AsyncStorage.getItem('pass')
+            if (value !== null) {
+                dispatch(getLoginSuccess({ token: value, nip: value2, password: value3 }));
+            }
+        } catch (e) {
+            console.log('Kosong');
+        }
     };
 };

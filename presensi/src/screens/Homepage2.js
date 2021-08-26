@@ -44,8 +44,10 @@ const HomePage = ({ navigation }) => {
         dispatch(profileAction({ token: user.auth.token, nip: user.auth.nip }));
     }, []);
 
-    useEffect(async () => {
-        await dispatch(presensiAction({ token: user.auth.token, nip: user.auth.nip }));
+    useEffect(() => {
+        (async () => {
+            await dispatch(presensiAction({ token: user.auth.token, nip: user.auth.nip }));
+        })
         setLoading(false)
     }, []);
 
@@ -148,7 +150,7 @@ const HomePage = ({ navigation }) => {
                     </View>
                 </ScrollView>
                 <View style={styles.container9}>
-                    <Button
+                    {/* <Button
                         title={"Presensi Datang"}
                         onPress={() => navigation.navigate("PresensiScreen")}
                         style={styles.datangButton}
@@ -161,12 +163,21 @@ const HomePage = ({ navigation }) => {
                         style={styles.datangButton}
                         disabled={time.time.cek_plg == 0 || presensi.presensi.SN_OUT !== null ? true : false}
                         color={'#EE9D52'}
-                    />
-                    {/* <TouchableOpacity
-                    onPress={() => navigation.navigate("PresensiScreen")}
+                    /> */}
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate("PresensiScreen")}
+                        style={time.time.cek_dtg == 0 || presensi.presensi.SN_IN !== null ? styles.disabledButton : styles.datangButton}
+                        disabled={time.time.cek_dtg == 0 || presensi.presensi.SN_IN !== null ? true : false}
                     >
                         <Text>Presensi Datang</Text>
-                    </TouchableOpacity> */}
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate("PresensiScreen2")}
+                        style={time.time.cek_dtg == 0 || presensi.presensi.SN_IN !== null ? styles.disabledButton : styles.pulangButton}
+                        disabled={time.time.cek_dtg == 0 || presensi.presensi.SN_IN !== null ? true : false}
+                    >
+                        <Text>Presensi Pulang</Text>
+                    </TouchableOpacity>
                 </View>
             </ImageBackground>
         </View>
@@ -283,7 +294,28 @@ const styles = StyleSheet.create({
         right: 13
     },
     datangButton: {
-        width: wp('90%'),
+        width: wp('45%'),
+        backgroundColor: '#66C57A',
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingVertical: 7,
+        borderRadius: 7
+    },
+    pulangButton: {
+        width: wp('45%'),
+        backgroundColor: '#EE9D52',
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingVertical: 7,
+        borderRadius: 7
+    },
+    disabledButton: {
+        width: wp('45%'),
+        backgroundColor: '#c4c4c4',
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingVertical: 7,
+        borderRadius: 7
     },
     datangText: {
         fontSize: 16,

@@ -37,7 +37,7 @@ export const resetAction = (value) => {
                     },
                 }
             );
-            console.log('ini res search', res.data);
+            // console.log('ini res search', res.data);
             dispatch(getResetSuccess(res.data));
         } catch (error) {
             console.log('Get history Error', error.response.data);

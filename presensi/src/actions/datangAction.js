@@ -32,7 +32,7 @@ export const datangAction = (payload) => {
                 data: data
             };
             const res = await axios(config)
-            console.log('respon datang', res.data);
+            // console.log('respon datang', res.data);
             dispatch(getDatangSuccess(res.data));
 
         } catch (error) {
@@ -73,7 +73,7 @@ export const pulangAction = (payload) => {
                 data: data
             };
             const res = await axios(config)
-            console.log('respon datang', res.data);
+            // console.log('respon datang', res.data);
             dispatch(getPulangSuccess(res.data));
 
         } catch (error) {

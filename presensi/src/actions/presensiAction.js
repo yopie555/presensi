@@ -23,7 +23,7 @@ export const presensiAction = (value) => {
         try {
             dispatch(getPresensiRequest());
             const res = await axios.get(`${BASE_URL}/presensi?token=${value.token}&username=${value.nip}`);
-            console.log('ini res search', res.data.data_presensi);
+            console.log('ini', res.data.data_presensi);
             dispatch(getPresensiSuccess(res.data.data_presensi));
         } catch (error) {
             console.log('Get Presensi Error', error.response.data);

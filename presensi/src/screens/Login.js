@@ -24,8 +24,8 @@ import Logo2 from '../assets/umrah.png'
 import Background from '../assets/background2.png'
 
 const Login = ({ navigation }) => {
-    const [nip, setNip] = useState("d001");
-    const [password, setPassword] = useState("abc123");
+    const [nip, setNip] = useState("");
+    const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false)
 
     const dispatch = useDispatch();
@@ -87,7 +87,7 @@ const Login = ({ navigation }) => {
                             }
                         }}>
                         {loading ? <View>
-                            <ActivityIndicator size="large" color="#28df99" />
+                            <ActivityIndicator size="large" color="#DAC34D" />
                         </View> :
                             <Text style={styles.textLogin}>Masuk</Text>
                         }
@@ -120,9 +120,8 @@ const styles = StyleSheet.create({
         flex: 1
     },
     logo: {
-        width: '20%',
-        height: null,
-        aspectRatio: 0.83,
+        width: 55,
+        height: 75,
         marginBottom: 10,
     },
     logo2: {

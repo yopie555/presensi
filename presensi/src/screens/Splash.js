@@ -33,8 +33,11 @@ function SplashScreen({ navigation }) {
                 <View style={styles.subContainer}>
 
                     <Image style={styles.image} source={Logo} />
-                    <Text style={styles.text}>SISTEM INFORMASI</Text>
-                    <Text style={styles.text}>PRESENSI UMRAH</Text>
+                    <Text style={styles.text}>
+                        PRESENSI
+                        {'\n'}
+                        UMRAH
+                    </Text>
                 </View>
             </ImageBackground>
         </View>
@@ -50,15 +53,15 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     subContainer: {
-        top: '41%',
+        top: '35%',
         position: 'absolute',
         width: '100%',
         alignItems: 'center',
     },
     image: {
-        width: 150,
-        height: 180,
-        marginBottom: 30,
+        width: 110,
+        height: 148,
+        marginBottom: 20,
     },
     background: {
         width: '100%',
@@ -69,8 +72,11 @@ const styles = StyleSheet.create({
     },
     text: {
         color: '#FFF',
-        fontSize: 22,
-        fontFamily: 'Serifa-Bold-BT'
+        fontSize: 34,
+        fontFamily: 'Serifa-Bold-BT',
+        fontWeight: 'bold',
+        textAlign: 'center',
+        color: '#DAC34D'
     },
     logo: {
         position: 'absolute',

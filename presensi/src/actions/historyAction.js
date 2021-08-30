@@ -36,7 +36,7 @@ export const historyAction = (value) => {
                     },
                 }
             );
-            console.log('ini res search', res.data.results);
+            // console.log('ini res search', res.data.results);
             dispatch(getHistorySuccess(res.data.results));
         } catch (error) {
             console.log('Get history Error', error.response.data);

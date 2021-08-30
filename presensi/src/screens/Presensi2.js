@@ -12,7 +12,8 @@ import {
     ScrollView,
     ToastAndroid,
     Modal,
-    ActivityIndicator
+    ActivityIndicator,
+    KeyboardAvoidingView
 } from 'react-native';
 import moment from 'moment';
 import GetLocation from 'react-native-get-location'
@@ -23,6 +24,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import FormData from 'form-data';
 import { datangAction, pulangAction } from '../actions/datangAction';
+import { presensiAction } from '../actions/presensiAction';
 import BerhasilModal from '../components/PresensiBerhasil'
 
 import Logo2 from '../assets/umrah.png'
@@ -37,6 +39,7 @@ const presensi = ({ navigation }) => {
     const [photo, setPhoto] = useState(null)
     const [rencana, setRencana] = useState("");
     const [loading, setLoading] = useState(false)
+    const [loading2, setLoading2] = useState(false)
     const [berhasilVisible, setBerhasilVisible] = useState(false);
     const submitPresensiD = () => {
         const data = new FormData();
@@ -47,14 +50,14 @@ const presensi = ({ navigation }) => {
         dispatch(pulangAction({ data, token: user.auth.token }));
     };
 
-
     const dispatch = useDispatch();
-    const address = () => {
-        dispatch(addressAction({ latitude: lat, longitude: long }))
+    const address = (latitude, longitude) => {
+        dispatch(addressAction({ latitude: latitude, longitude: longitude }))
     }
-    useEffect(() => {
-        getGeo()
-    }, [])
+    // useEffect(() => {
+    //     getGeo()
+    // }, [])
+
     const thisAddress = useSelector((state) => state.address);
     const user = useSelector((state) => state.auth);
 
@@ -100,8 +103,9 @@ const presensi = ({ navigation }) => {
     })
         .then(location => {
             // console.log(location);
-            setLong(location.longitude);
-            setLat(location.latitude)
+            // setLong(location.longitude);
+            // setLat(location.latitude)
+            return location
         })
         .catch(error => {
             const { code, message } = error;
@@ -110,125 +114,138 @@ const presensi = ({ navigation }) => {
         })
 
     return (
-        <View style={styles.container}>
-            <StatusBar hidden={true} />
-            <Modal
-                animationType="slide"
-                transparent={true}
-                visible={berhasilVisible}
-                onRequestClose={() => {
-                    setBerhasilVisible(false);
-                }}>
-                <View style={styles.welcomeModal}>
-                    <BerhasilModal setBerhasilVisible={setBerhasilVisible} />
-                </View>
-            </Modal>
-            <ImageBackground
-                source={Background}
-                style={styles.background}>
-                <Image
-                    source={Logo2}
-                    style={styles.logo2} />
-
-                <View style={styles.container2}>
-
-                    <View style={styles.container3}>
-                        <Text style={styles.textTitle}>Presensi Pulang</Text>
-                    </View>
-                    <View style={styles.container5}>
-                        <Text style={styles.textJam}>Jam Server : {CurrentTime}</Text>
-                    </View>
-                    <View style={styles.container4}>
+        <KeyboardAvoidingView>
+            <ScrollView bounces={false}>
+                <View style={styles.container}>
+                    <StatusBar hidden={true} />
+                    <Modal
+                        animationType="slide"
+                        transparent={true}
+                        visible={berhasilVisible}
+                        onRequestClose={() => {
+                            setBerhasilVisible(false);
+                        }}>
+                        <View style={styles.welcomeModal}>
+                            <BerhasilModal setBerhasilVisible={setBerhasilVisible} />
+                        </View>
+                    </Modal>
+                    <ImageBackground
+                        source={Background}
+                        style={styles.background}>
                         <Image
-                            source={{
-                                uri: imageUri ||
-                                    'https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png'
-                            }}
-                            style={styles.image}
-                        />
-                        <TouchableOpacity
-                            style={styles.btn3}
-                            onPress={() => {
-                                opencamera()
-                            }}>
-                            <Icon
-                                name="camera"
-                                size={30}
-                                color="white"
-                            />
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.container6}>
-                        <Text style={styles.textTitle}>
-                            Lokasi Anda
-                        </Text>
-                        <View style={styles.container7}>
-                            <Text style={styles.textGeo}>
-                                {thisAddress.address.place_name}
-                            </Text>
-                            <TouchableOpacity
-                                style={styles.btn4}
-                                onPress={() => {
-                                    address();
-                                }}
-                            >
-                                <Icon
-                                    name="map-search-outline"
-                                    size={30}
-                                    color="white"
+                            source={Logo2}
+                            style={styles.logo2} />
+
+                        <View style={styles.container2}>
+
+                            <View style={styles.container3}>
+                                <Text style={styles.textTitle}>Presensi Pulang</Text>
+                            </View>
+                            <View style={styles.container5}>
+                                <Text style={styles.textJam}>Jam Server : {CurrentTime}</Text>
+                            </View>
+                            <View style={styles.container4}>
+                                <Image
+                                    source={{
+                                        uri: imageUri ||
+                                            'https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png'
+                                    }}
+                                    style={styles.image}
                                 />
-                                <Text style={{ color: 'white' }}>Alamat</Text>
-                            </TouchableOpacity>
+                                <TouchableOpacity
+                                    style={styles.btn3}
+                                    onPress={() => {
+                                        opencamera()
+                                    }}>
+                                    <Icon
+                                        name="camera"
+                                        size={30}
+                                        color="white"
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                            <View style={styles.container6}>
+                                <Text style={styles.textTitle}>
+                                    Lokasi Anda
+                                </Text>
+                                <View style={styles.container7}>
+                                    <Text style={styles.textGeo}>
+                                        {thisAddress.address.place_name}
+                                    </Text>
+                                    <TouchableOpacity
+                                        style={styles.btn4}
+                                        onPress={async () => {
+                                            setLoading(true)
+                                            let response_getGeo = await getGeo()
+                                            if (response_getGeo) {
+                                                address(response_getGeo.latitude, response_getGeo.longitude)
+                                            }
+                                            setLoading(false)
+                                        }}
+                                    >
+                                        <Icon
+                                            name="map-search-outline"
+                                            size={30}
+                                            color="white"
+                                        />
+                                        {loading ? <View>
+                                            <ActivityIndicator size="large" color="#DAC34D" />
+                                        </View> :
+                                            <Text style={{ color: 'white' }}>Alamat</Text>
+                                        }
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                            <ScrollView style={styles.container8}>
+                                <Text style={styles.textTitle2}>
+                                    Realisasi Kerja Hari Ini
+                                </Text>
+                                <TextInput
+                                    style={styles.inputText2}
+                                    onChangeText={(rencana) => setRencana(rencana)}
+                                    value={rencana}
+                                    placeholder="Realisasi Kerja Hari Ini"
+                                    multiline
+                                />
+                                <View style={styles.container9}>
+                                    <TouchableOpacity
+                                        style={styles.datangButton}
+                                        onPress={async () => {
+                                            // setLoading2(true)
+                                            // await dispatch(presensiAction({ token: user.auth.token, nip: user.auth.nip }));
+                                            // setLoading2(false)
+                                            navigation.navigate("HomepageScreen")
+                                        }}>
+                                        <Text style={styles.datangText}>Tutup</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity
+                                        style={styles.datangButton2}
+                                        onPress={async () => {
+                                            if (
+                                                photo === null
+                                            ) { ToastAndroid.show("Silahkan Ambil Gambar Terlebih Dahulu", 2000) }
+                                            else if (
+                                                thisAddress.address.place_name === ""
+                                            ) { ToastAndroid.show("Silahkan Tekan Button Alamat Terlebih Dahulu", 2000) }
+                                            else if (
+                                                rencana === ""
+                                            ) { ToastAndroid.show("Silahkan Isi Realisasi Kinerja Terlebih Dahulu", 2000) }
+                                            else {
+                                                setLoading(true)
+                                                await submitPresensiD()
+                                                setLoading(false)
+                                                setBerhasilVisible(true)
+                                            }
+                                        }}>
+                                        <Text style={styles.datangText}>Simpan</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </ScrollView>
                         </View>
-                    </View>
-                    <ScrollView style={styles.container8}>
-                        <Text style={styles.textTitle2}>
-                            Realisasi Kerja Hari Ini
-                        </Text>
-                        <TextInput
-                            style={styles.inputText2}
-                            onChangeText={(rencana) => setRencana(rencana)}
-                            value={rencana}
-                            placeholder="Realisasi Kerja Hari Ini"
-                            multiline
-                        />
-                        <View style={styles.container9}>
-                            <TouchableOpacity
-                                style={styles.datangButton}
-                                onPress={async () => {
-                                    setLoading(true)
-                                    await dispatch(presensiAction({ token: user.auth.token, nip: user.auth.nip }));
-                                    setLoading(false)
-                                    navigation.navigate("HomepageScreen")
-                                }}>
-                                <Text style={styles.datangText}>Tutup</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                style={styles.datangButton2}
-                                onPress={async () => {
-                                    if (
-                                        photo === null
-                                    ) { ToastAndroid.show("Silahkan Ambil Gambar Terlebih Dahulu", 2000) }
-                                    else if (
-                                        thisAddress.address.place_name === ""
-                                    ) { ToastAndroid.show("Silahkan Tekan Button Alamat Terlebih Dahulu", 2000) }
-                                    else if (
-                                        rencana === ""
-                                    ) { ToastAndroid.show("Silahkan Isi Rencana Kinerja Terlebih Dahulu", 2000) }
-                                    else {
-                                        setLoading(true)
-                                        await submitPresensiD()
-                                        setLoading(false)
-                                        setBerhasilVisible(true)
-                                    }
-                                }}>
-                                <Text style={styles.datangText}>Simpan</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </ScrollView>
+                    </ImageBackground>
                 </View>
-            </ImageBackground>
-        </View>
+            </ScrollView>
+        </KeyboardAvoidingView>
 
     );
 }
@@ -409,6 +426,11 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
         color: 'white',
+    },
+    welcomeModal: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginHorizontal: '15%'
     },
 })
 export default presensi;

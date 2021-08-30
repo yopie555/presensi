@@ -14,7 +14,7 @@ function addressReducer(state = initialState, action) {
                 loading: true,
             });
         case types.LOGIN_SUCCESS:
-            console.log('reducers', action.payload);
+            // console.log('reducers', action.payload);
             return Object.assign({}, state, {
                 loading: false,
                 auth: action.payload,

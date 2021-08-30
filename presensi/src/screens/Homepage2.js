@@ -10,7 +10,8 @@ import {
     ScrollView,
     Modal,
     Button,
-    ActivityIndicator
+    ActivityIndicator,
+    RefreshControl
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -39,6 +40,20 @@ const HomePage = ({ navigation }) => {
     const [profileVisible, setProfileVisible] = useState(false);
     const [profileVisible2, setProfileVisible2] = useState(false);
     const [loading, setLoading] = useState(true)
+    const [refreshing, setRefreshing] = React.useState(false);
+
+    const absen = async () => {
+        await dispatch(presensiAction({ token: user.auth.token, nip: user.auth.nip })).then(() => setLoading(false));
+    }
+
+    const wait = (timeout) => {
+        return new Promise(resolve => setTimeout(resolve, timeout));
+    }
+
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        wait(2000).then(() => setRefreshing(false));
+    }, []);
 
     useEffect(() => {
         dispatch(profileAction({ token: user.auth.token, nip: user.auth.nip }));
@@ -46,7 +61,8 @@ const HomePage = ({ navigation }) => {
 
     useEffect(() => {
         (async () => {
-            await dispatch(presensiAction({ token: user.auth.token, nip: user.auth.nip }));
+            setLoading(true)
+            absen();
         })
         setLoading(false)
     }, []);
@@ -77,6 +93,7 @@ const HomePage = ({ navigation }) => {
                     <WelcomeModal setWelcomeVisible={setWelcomeVisible} />
                 </View>
             </Modal>
+
             <Modal
                 animationType="slide"
                 transparent={true}
@@ -87,7 +104,7 @@ const HomePage = ({ navigation }) => {
                 <View style={styles.modalContainerImage}>
                     <Image
                         style={styles.modalImage}
-                        source={{ uri: `${BASE_URL}/${presensi.presensi.Foto_plg}` }}
+                        source={{ uri: 'https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png' || `${BASE_URL}/${presensi.presensi.Foto_plg}` }}
                     />
                 </View>
             </Modal>
@@ -117,9 +134,18 @@ const HomePage = ({ navigation }) => {
                         PRESENSI HARI INI
                     </Text>
                 </View>
-                <ScrollView showsVerticalScrollIndicator={false}>
+                <ScrollView
+                    showsVerticalScrollIndicator={false}
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={refreshing}
+                            onRefresh={absen}
+                        />
+                    }
+                >
                     <View style={styles.container8}>
                         <Text style={styles.descriptionText}>Jam Datang</Text>
+                        {/* {presensi.presensi.ScanIn == null ? <Text style={styles.detailsText}>-</Text> : <Text style={styles.detailsText}>{presensi.presensi.ScanIn}</Text>} */}
                         <Text style={styles.detailsText}>{presensi.presensi.ScanIn}</Text>
                         <Text style={styles.descriptionText}>Lokasi Datang</Text>
                         <Text style={styles.detailsText}>{presensi.presensi.SN_IN}</Text>
@@ -134,7 +160,7 @@ const HomePage = ({ navigation }) => {
                         />
                     </View>
                     <View style={styles.container8}>
-                        <Text style={styles.descriptionText}>Jam Datang</Text>
+                        <Text style={styles.descriptionText}>Jam Pulang</Text>
                         <Text style={styles.detailsText}>{presensi.presensi.ScanOut}</Text>
                         <Text style={styles.descriptionText}>Lokasi Pulang</Text>
                         <Text style={styles.detailsText}>{presensi.presensi.SN_OUT}</Text>
@@ -150,31 +176,17 @@ const HomePage = ({ navigation }) => {
                     </View>
                 </ScrollView>
                 <View style={styles.container9}>
-                    {/* <Button
-                        title={"Presensi Datang"}
-                        onPress={() => navigation.navigate("PresensiScreen")}
-                        style={styles.datangButton}
-                        disabled={time.time.cek_dtg == 0 || presensi.presensi.SN_IN !== null ? true : false}
-                        color={'#66C57A'}
-                    />
-                    <Button
-                        title={"Presensi Pulang"}
-                        onPress={() => navigation.navigate("PresensiScreen2")}
-                        style={styles.datangButton}
-                        disabled={time.time.cek_plg == 0 || presensi.presensi.SN_OUT !== null ? true : false}
-                        color={'#EE9D52'}
-                    /> */}
                     <TouchableOpacity
                         onPress={() => navigation.navigate("PresensiScreen")}
-                        style={time.time.cek_dtg == 0 || presensi.presensi.SN_IN !== null ? styles.disabledButton : styles.datangButton}
-                        disabled={time.time.cek_dtg == 0 || presensi.presensi.SN_IN !== null ? true : false}
+                        style={time.time.cek_dtg == 0 || presensi.presensi.SN_IN != null ? styles.disabledButton : styles.datangButton}
+                        disabled={time.time.cek_dtg == 0 || presensi.presensi.SN_IN != null ? true : false}
                     >
                         <Text>Presensi Datang</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         onPress={() => navigation.navigate("PresensiScreen2")}
-                        style={time.time.cek_dtg == 0 || presensi.presensi.SN_IN !== null ? styles.disabledButton : styles.pulangButton}
-                        disabled={time.time.cek_dtg == 0 || presensi.presensi.SN_IN !== null ? true : false}
+                        style={time.time.cek_plg == 0 || presensi.presensi.SN_OUT != null ? styles.disabledButton : styles.pulangButton}
+                        disabled={time.time.cek_plg == 0 || presensi.presensi.SN_OUT != null ? true : false}
                     >
                         <Text>Presensi Pulang</Text>
                     </TouchableOpacity>

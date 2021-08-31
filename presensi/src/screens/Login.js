@@ -146,7 +146,8 @@ const styles = StyleSheet.create({
         marginLeft: 8,
         paddingLeft: 15,
         fontSize: 18,
-        fontFamily: 'Serifa-BT'
+        fontFamily: 'Serifa-BT',
+        color: '#000'
     },
     textContainer: {
         flexDirection: 'row',

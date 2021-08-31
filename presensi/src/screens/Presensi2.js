@@ -345,6 +345,7 @@ const styles = StyleSheet.create({
         marginLeft: 8,
         paddingHorizontal: 10,
         fontFamily: 'Poppins-Regular',
+        color: '#000'
     },
     btn1: {
         backgroundColor: '#264384',

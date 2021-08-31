@@ -62,7 +62,7 @@ const HomePage = ({ navigation }) => {
     useEffect(() => {
         (async () => {
             setLoading(true)
-            absen();
+            await dispatch(presensiAction({ token: user.auth.token, nip: user.auth.nip }))
         })
         setLoading(false)
     }, []);
@@ -104,7 +104,7 @@ const HomePage = ({ navigation }) => {
                 <View style={styles.modalContainerImage}>
                     <Image
                         style={styles.modalImage}
-                        source={{ uri: 'https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png' || `${BASE_URL}/${presensi.presensi.Foto_plg}` }}
+                        source={{ uri: `${BASE_URL}/${presensi.presensi.Foto_plg}` }}
                     />
                 </View>
             </Modal>
@@ -152,6 +152,7 @@ const HomePage = ({ navigation }) => {
                         <Text style={styles.descriptionText}>Rencana Kerja</Text>
                         <Text style={styles.detailsText}>{presensi.presensi.Rencana_kerja}</Text>
                         <Button
+                            disabled={presensi.presensi.Foto_dtg == null ? true : false}
                             title={"lihat Foto"}
                             onPress={() => {
                                 setProfileVisible2(true)
@@ -167,6 +168,7 @@ const HomePage = ({ navigation }) => {
                         <Text style={styles.descriptionText}>Realisasi Kerja</Text>
                         <Text style={styles.detailsText}>{presensi.presensi.Realisasi_kerja}</Text>
                         <Button
+                            disabled={presensi.presensi.Foto_plg == null ? true : false}
                             title={"lihat Foto"}
                             onPress={() => {
                                 setProfileVisible(true)

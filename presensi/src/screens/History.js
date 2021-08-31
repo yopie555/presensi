@@ -103,6 +103,7 @@ const History = ({ navigation }) => {
                             onChangeText={(date) => setDate(date)}
                             value={text}
                             placeholder={"YYYY-MM-DD"}
+                            placeholderTextColor={'grey'}
                         />
                         <TouchableOpacity
                             style={styles.calendar}
@@ -133,6 +134,7 @@ const History = ({ navigation }) => {
                             onChangeText={(date2) => setDate2(date2)}
                             value={text2}
                             placeholder={"YYYY-MM-DD"}
+                            placeholderTextColor={'grey'}
                         />
                         <TouchableOpacity
                             style={styles.calendar}
@@ -273,7 +275,8 @@ const styles = StyleSheet.create({
         marginLeft: 8,
         paddingLeft: 15,
         fontSize: 16,
-        fontFamily: 'Poppins-Regular'
+        fontFamily: 'Poppins-Regular',
+        color: '#000'
     },
     textHistory: {
         textAlign: 'center'

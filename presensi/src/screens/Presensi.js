@@ -164,7 +164,7 @@ const presensi = ({ navigation }) => {
                             </View>
                             <View style={styles.container6}>
                                 <Text style={styles.textTitle}>
-                                    Lokasi Anda
+                                    Foto Anda
                                 </Text>
                                 <View style={styles.container7}>
                                     <Text style={styles.textGeo}>
@@ -339,6 +339,7 @@ const styles = StyleSheet.create({
         marginLeft: 8,
         paddingHorizontal: 10,
         fontFamily: 'Poppins-Regular',
+        color: "#000"
     },
     btn1: {
         backgroundColor: '#264384',

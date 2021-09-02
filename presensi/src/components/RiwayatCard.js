@@ -7,32 +7,32 @@ const RiwayatCard = (props) => {
     return (
         <View style={styles.container}>
             <View style={styles.containerT}>
-                <Text>Tanggal              : </Text>
-                <Text>{props.tgl}</Text>
+                <Text style={styles.text}>Tanggal             : </Text>
+                <Text style={styles.text}>{props.tgl}</Text>
             </View>
             <View style={styles.containerT}>
-                <Text>Jam Datang      : </Text>
-                <Text>{props.jamD}</Text>
+                <Text style={styles.text}>Jam Datang      : </Text>
+                <Text style={styles.text}>{props.jamD}</Text>
             </View>
             <View style={styles.containerT}>
-                <Text>Lokasi Datang  : </Text>
-                <Text style={styles.isi} >{props.lokD}</Text>
+                <Text style={styles.text}>Lokasi Datang  : </Text>
+                <Text style={styles.text} >{props.lokD}</Text>
             </View>
             <View style={styles.containerT}>
-                <Text>Rencana Kerja  : </Text>
-                <Text>{props.renK}</Text>
+                <Text style={styles.text}>Rencana Kerja  : </Text>
+                <Text style={styles.text}>{props.renK}</Text>
             </View>
             <View style={styles.containerT}>
-                <Text>Jam Pulang      : </Text>
-                <Text>{props.jamP}</Text>
+                <Text style={styles.text}>Jam Pulang      : </Text>
+                <Text style={styles.text}>{props.jamP}</Text>
             </View>
             <View style={styles.containerT}>
-                <Text>Lokasi Pulang  : </Text>
-                <Text>{props.lokP}</Text>
+                <Text style={styles.text}>Lokasi Pulang  : </Text>
+                <Text style={styles.text}>{props.lokP}</Text>
             </View>
             <View style={styles.containerT}>
-                <Text>Realisasi Kerja : </Text>
-                <Text>{props.relK}</Text>
+                <Text style={styles.text}>Realisasi Kerja : </Text>
+                <Text style={styles.text}>{props.relK}</Text>
             </View>
         </View>
     );
@@ -54,6 +54,9 @@ const styles = StyleSheet.create({
     },
     isi: {
         // textAlign: 'auto'
+    },
+    text: {
+        fontFamily: 'Serifa-BT'
     }
 })
 

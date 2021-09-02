@@ -231,13 +231,13 @@ const styles = StyleSheet.create({
     textTitle: {
         fontSize: 20,
         fontFamily: 'Serifa-Bold-BT',
-        fontWeight: 'bold',
+        // fontWeight: 'bold',
         color: '#264384',
         marginVertical: 10
     },
     text: {
         color: '#264384',
-        fontFamily: 'Poppins-SemiBold'
+        fontFamily: 'Serifa-Bold-BT'
     },
     text2: {
         fontSize: 20,
@@ -275,11 +275,12 @@ const styles = StyleSheet.create({
         marginLeft: 8,
         paddingLeft: 15,
         fontSize: 16,
-        fontFamily: 'Poppins-Regular',
+        fontFamily: 'Serifa-BT',
         color: '#000'
     },
     textHistory: {
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: 'Serifa-BT'
     },
     datangButton: {
         flexDirection: 'row',
@@ -294,8 +295,9 @@ const styles = StyleSheet.create({
     },
     datangText: {
         fontSize: 16,
-        fontWeight: 'bold',
+        // fontWeight: 'bold',
         color: 'white',
+        fontFamily: 'Serifa-Bold-BT'
     },
 })
 

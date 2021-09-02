@@ -83,7 +83,7 @@ const Login = ({ navigation }) => {
                                 setLoading(true)
                                 await dispatch(loginAction({ nip, password }))
                                 setLoading(false)
-                                navigation.navigate("HomepageScreen")
+                                // navigation.navigate("HomepageScreen")
                             }
                         }}>
                         {loading ? <View>

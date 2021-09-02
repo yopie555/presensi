@@ -26,6 +26,7 @@ import { BASE_URL } from '../constants/general';
 
 import Logo2 from '../assets/umrah.png'
 import Background from '../assets/background3.png'
+import { color } from 'react-native-elements/dist/helpers';
 
 
 
@@ -151,14 +152,24 @@ const HomePage = ({ navigation }) => {
                         <Text style={styles.detailsText}>{presensi.presensi.SN_IN}</Text>
                         <Text style={styles.descriptionText}>Rencana Kerja</Text>
                         <Text style={styles.detailsText}>{presensi.presensi.Rencana_kerja}</Text>
-                        <Button
-                            disabled={presensi.presensi.Foto_dtg == null ? true : false}
+                        {/* <Button
                             title={"lihat Foto"}
+                            color={"#264384"}
+                            style={{ fontFamily: 'Serifa-BT' }}
+                            /> */}
+                        <TouchableOpacity
+                            disabled={presensi.presensi.Foto_dtg == null ? true : false}
                             onPress={() => {
                                 setProfileVisible2(true)
                             }}
-                            color={"#264384"}
-                        />
+                            style={presensi.presensi.Foto_dtg == null ? styles.fotoBtnD : styles.fotoBtn}
+                        >
+                            <Text
+                                style={presensi.presensi.Foto_dtg == null ? styles.txtFotoD : styles.txtFoto}
+                            >
+                                Lihat Foto
+                            </Text>
+                        </TouchableOpacity>
                     </View>
                     <View style={styles.container8}>
                         <Text style={styles.descriptionText}>Jam Pulang</Text>
@@ -167,14 +178,27 @@ const HomePage = ({ navigation }) => {
                         <Text style={styles.detailsText}>{presensi.presensi.SN_OUT}</Text>
                         <Text style={styles.descriptionText}>Realisasi Kerja</Text>
                         <Text style={styles.detailsText}>{presensi.presensi.Realisasi_kerja}</Text>
-                        <Button
+                        {/* <Button
                             disabled={presensi.presensi.Foto_plg == null ? true : false}
                             title={"lihat Foto"}
                             onPress={() => {
                                 setProfileVisible(true)
                             }}
                             color={"#264384"}
-                        />
+                        /> */}
+                        <TouchableOpacity
+                            disabled={presensi.presensi.Foto_plg == null ? true : false}
+                            onPress={() => {
+                                setProfileVisible(true)
+                            }}
+                            style={presensi.presensi.Foto_plg == null ? styles.fotoBtnD : styles.fotoBtn}
+                        >
+                            <Text
+                                style={presensi.presensi.Foto_plg == null ? styles.txtFotoD : styles.txtFoto}
+                            >
+                                Lihat Foto
+                            </Text>
+                        </TouchableOpacity>
                     </View>
                 </ScrollView>
                 <View style={styles.container9}>
@@ -183,14 +207,22 @@ const HomePage = ({ navigation }) => {
                         style={time.time.cek_dtg == 0 || presensi.presensi.SN_IN != null ? styles.disabledButton : styles.datangButton}
                         disabled={time.time.cek_dtg == 0 || presensi.presensi.SN_IN != null ? true : false}
                     >
-                        <Text>Presensi Datang</Text>
+                        <Text
+                            style={time.time.cek_dtg == 0 || presensi.presensi.SN_IN != null ? styles.txtFotoD : styles.txtFoto}
+                        >
+                            Presensi Datang
+                        </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         onPress={() => navigation.navigate("PresensiScreen2")}
                         style={time.time.cek_plg == 0 || presensi.presensi.SN_OUT != null ? styles.disabledButton : styles.pulangButton}
                         disabled={time.time.cek_plg == 0 || presensi.presensi.SN_OUT != null ? true : false}
                     >
-                        <Text>Presensi Pulang</Text>
+                        <Text
+                            style={time.time.cek_plg == 0 || presensi.presensi.SN_OUT != null ? styles.txtFotoD : styles.txtFoto}
+                        >
+                            Presensi Pulang
+                        </Text>
                     </TouchableOpacity>
                 </View>
             </ImageBackground>
@@ -283,15 +315,17 @@ const styles = StyleSheet.create({
     },
     descriptionText: {
         color: '#264384',
-        fontWeight: 'bold',
+        // fontWeight: 'bold',
         fontSize: 16,
         marginTop: 5,
         paddingHorizontal: '5%',
+        fontFamily: 'Serifa-Bold-BT'
     },
     detailsText: {
         color: '#77797D',
         textAlign: 'justify',
         paddingHorizontal: '5%',
+        fontFamily: 'Serifa-BT'
     },
     btn1: {
         backgroundColor: '#264384',
@@ -346,6 +380,30 @@ const styles = StyleSheet.create({
         width: '100%',
         height: null,
         aspectRatio: 1,
+    },
+    fotoBtn: {
+        alignItems: 'center',
+        borderWidth: 1,
+        paddingVertical: 5,
+        borderRadius: 8,
+        backgroundColor: '#264384',
+        borderColor: '#c4c4c4'
+    },
+    fotoBtnD: {
+        alignItems: 'center',
+        borderWidth: 1,
+        paddingVertical: 5,
+        borderRadius: 8,
+        backgroundColor: '#c4c4c4',
+        borderColor: '#c4c4c4'
+    },
+    txtFoto: {
+        fontFamily: 'Serifa-BT',
+        color: '#fff'
+    },
+    txtFotoD: {
+        fontFamily: 'Serifa-BT',
+        color: '#000'
     },
 })
 

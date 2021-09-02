@@ -72,6 +72,9 @@
 		<string>Poppins-Bold.ttf</string>
 		<string>Poppins-Regular.ttf</string>
 		<string>Poppins-SemiBold.ttf</string>
+		<string>Serifa-Bold-BT.ttf</string>
+		<string>Serifa-BT.ttf</string>
+		<string>Serifa-Thin-BT.ttf</string>
 	</array>
 </dict>
 </plist>

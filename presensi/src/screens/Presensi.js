@@ -186,7 +186,7 @@ const presensi = ({ navigation }) => {
                                             size={30}
                                             color="white"
                                         />
-                                        <Text style={{ color: 'white' }}>Alamat</Text>
+                                        <Text style={{ color: 'white', fontFamily: "Serifa-BT" }}>Alamat</Text>
                                     </TouchableOpacity>
                                 </View>
                             </View>
@@ -299,17 +299,16 @@ const styles = StyleSheet.create({
         fontSize: 16
     },
     textTitle: {
-        fontFamily: 'Serifa-BT',
+        fontFamily: 'Serifa-Bold-BT',
         fontSize: 24,
         color: '#264384',
-        fontWeight: 'bold',
         paddingVertical: 3
     },
     textTitle2: {
-        fontFamily: 'Serifa-BT',
+        fontFamily: 'Serifa-Bold-BT',
         fontSize: 16,
         color: '#264384',
-        fontWeight: 'bold',
+        // fontWeight: 'bold',
         paddingVertical: 3,
         borderWidth: 1,
         paddingVertical: 5,
@@ -338,7 +337,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         marginLeft: 8,
         paddingHorizontal: 10,
-        fontFamily: 'Poppins-Regular',
+        fontFamily: 'Serifa-BT',
         color: "#000"
     },
     btn1: {
@@ -419,8 +418,9 @@ const styles = StyleSheet.create({
     },
     datangText: {
         fontSize: 16,
-        fontWeight: 'bold',
+        // fontWeight: 'bold',
         color: 'white',
+        fontFamily: 'Serifa-Bold-BT'
     },
     welcomeModal: {
         alignItems: 'center',

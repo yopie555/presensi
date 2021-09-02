@@ -207,17 +207,17 @@ const styles = StyleSheet.create({
     },
     text: {
         color: '#264384',
-        fontFamily: 'Poppins-SemiBold'
+        fontFamily: 'Serifa-BT'
     },
     text1: {
         color: '#264384',
-        fontFamily: 'Poppins-SemiBold',
+        fontFamily: 'Serifa-BT',
         fontSize: 14,
         textAlign: 'center'
     },
     text2: {
         color: '#264384',
-        fontFamily: 'Poppins-SemiBold',
+        fontFamily: 'Serifa-BT',
         fontSize: 24,
         textAlign: 'center'
     },
@@ -227,15 +227,17 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginTop: 5,
         paddingHorizontal: '5%',
+        fontFamily: 'Serifa-BT'
     },
     detailsText: {
         color: '#77797D',
         textAlign: 'justify',
         paddingHorizontal: '5%',
+        fontFamily: 'Serifa-BT'
     },
     header: {
         color: '#264384',
-        fontFamily: 'Poppins-SemiBold',
+        fontFamily: 'Serifa-BT',
         fontSize: 22,
         textAlign: 'center'
     },

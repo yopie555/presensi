@@ -118,7 +118,8 @@ const styles = StyleSheet.create({
         right: 8
     },
     textHistory: {
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: 'Serifa-BT'
     },
     inputText: {
         // width: '94%',

@@ -115,13 +115,13 @@ const styles = StyleSheet.create({
     textTitle: {
         fontSize: 20,
         fontFamily: 'Serifa-Bold-BT',
-        fontWeight: 'bold',
+        // fontWeight: 'bold',
         color: '#264384',
         marginVertical: 10
     },
     text: {
         color: '#264384',
-        fontFamily: 'Poppins-SemiBold'
+        fontFamily: 'Serifa-BT'
     },
     text2: {
         fontSize: 20,

@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
         color: '#FFF',
         fontSize: 34,
         fontFamily: 'Serifa-Bold-BT',
-        fontWeight: 'bold',
+        // fontWeight: 'bold',
         textAlign: 'center',
         color: '#DAC34D'
     },

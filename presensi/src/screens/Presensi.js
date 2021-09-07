@@ -100,9 +100,9 @@ const presensi = ({ navigation }) => {
         timeout: 15000,
     })
         .then(location => {
-            // console.log(location);
             // setLong(location.longitude);
             // setLat(location.latitude)
+            console.log('lok', location);
             return location
         })
         .catch(error => {
@@ -176,8 +176,10 @@ const presensi = ({ navigation }) => {
                                             setLoading(true)
                                             let response_getGeo = await getGeo()
                                             if (response_getGeo) {
+
                                                 address(response_getGeo.latitude, response_getGeo.longitude)
                                             }
+                                            console.log('qwe', response_getGeo);
                                             setLoading(false)
                                         }}
                                     >

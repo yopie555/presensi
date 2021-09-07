@@ -70,7 +70,7 @@ const Reset = ({ navigation }) => {
                     onPress={async () => {
                         if (
                             sandiLama !== user.auth.password
-                        ) { ToastAndroid.show("Cek Kembali Password Lama anda", 2000) }
+                        ) { ToastAndroid.show("Periksa Kembali Password Lama anda", 2000) }
                         else if (
                             sandiBaru !== konfirmasiSandi
                         ) { ToastAndroid.show("Sandi Baru dan Konfirmasi Sandi Tidak Sama", 2000) }

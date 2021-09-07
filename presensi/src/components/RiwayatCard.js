@@ -1,11 +1,41 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View, Modal, Image } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { BASE_URL } from '../constants/general';
 
 const RiwayatCard = (props) => {
-    console.log('props', props);
-
+    const [profileVisible, setProfileVisible] = useState(false);
+    const [profileVisible2, setProfileVisible2] = useState(false);
     return (
         <View style={styles.container}>
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={profileVisible}
+                onRequestClose={() => {
+                    setProfileVisible(false);
+                }}>
+                <View style={styles.modalContainerImage}>
+                    <Image
+                        style={styles.modalImage}
+                        source={{ uri: `${BASE_URL}/${props.fotD}` }}
+                    />
+                </View>
+            </Modal>
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={profileVisible2}
+                onRequestClose={() => {
+                    setProfileVisible2(false);
+                }}>
+                <View style={styles.modalContainerImage}>
+                    <Image
+                        style={styles.modalImage}
+                        source={{ uri: `${BASE_URL}/${props.fotP}` }}
+                    />
+                </View>
+            </Modal>
             <View style={styles.containerT}>
                 <Text style={styles.text}>Tanggal             : </Text>
                 <Text style={styles.text}>{props.tgl}</Text>
@@ -34,6 +64,26 @@ const RiwayatCard = (props) => {
                 <Text style={styles.text}>Realisasi Kerja : </Text>
                 <Text style={styles.text}>{props.relK}</Text>
             </View>
+            <View style={styles.containerButton}>
+                <TouchableOpacity
+                    disabled={props.fotD === null ? true : false}
+                    style={props.fotD === null ? styles.datangButton : styles.datangButton2}
+                    onPress={() => {
+                        setProfileVisible(true)
+                    }}
+                >
+                    <Text style={styles.datangText}>Foto Datang</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    disabled={props.fotP === null ? true : false}
+                    style={props.fotP === null ? styles.datangButton : styles.datangButton2}
+                    onPress={() => {
+                        setProfileVisible2(true)
+                    }}
+                >
+                    <Text style={styles.datangText}>Foto Pulang</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 }
@@ -52,12 +102,43 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         paddingRight: 90
     },
-    isi: {
-        // textAlign: 'auto'
+    containerButton: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginVertical: 5
     },
     text: {
         fontFamily: 'Serifa-BT'
-    }
+    },
+    datangButton2: {
+        backgroundColor: '#264384',
+        borderRadius: 8,
+        paddingVertical: 5,
+        paddingHorizontal: 35
+    },
+    datangButton: {
+        backgroundColor: '#c4c4c4',
+        borderRadius: 8,
+        paddingVertical: 5,
+        paddingHorizontal: 35
+    },
+    datangText: {
+        fontSize: 16,
+        // fontWeight: 'bold',
+        color: 'white',
+        fontFamily: 'Serifa-Bold-BT'
+    },
+    modalContainerImage: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1,
+        backgroundColor: '#264384',
+    },
+    modalImage: {
+        width: '100%',
+        height: null,
+        aspectRatio: 1,
+    },
 })
 
 export default RiwayatCard;

@@ -102,7 +102,7 @@ const presensi = ({ navigation }) => {
         timeout: 15000,
     })
         .then(location => {
-            // console.log(location);
+            console.log(location);
             // setLong(location.longitude);
             // setLat(location.latitude)
             return location

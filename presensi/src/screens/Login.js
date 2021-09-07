@@ -11,8 +11,6 @@ import {
     ActivityIndicator,
     ToastAndroid
 } from 'react-native';
-import FormData from 'form-data';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { loginAction } from '../actions/authAction';
 
@@ -27,7 +25,7 @@ const Login = ({ navigation }) => {
     const [nip, setNip] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false)
-
+    const user = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     return (
         <View style={styles.container}>
@@ -73,12 +71,15 @@ const Login = ({ navigation }) => {
                             placeholder="Kata Sandi"
                         />
                     </View>
+                    {user.error && (
+                        <Text style={{ color: 'red', marginHorizontal: 55 }}>Periksa Kembali NIK atau Password Anda</Text>
+                    )}
                     <TouchableOpacity
                         style={styles.loginBtn}
                         onPress={async () => {
                             if (
                                 nip === "" || password === ""
-                            ) { ToastAndroid.show("You Must Fill All Field", 2000) }
+                            ) { ToastAndroid.show("Harap Isi Semua Data", 2000) }
                             else {
                                 setLoading(true)
                                 await dispatch(loginAction({ nip, password }))

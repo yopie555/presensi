@@ -152,11 +152,6 @@ const HomePage = ({ navigation }) => {
                         <Text style={styles.detailsText}>{presensi.presensi.SN_IN}</Text>
                         <Text style={styles.descriptionText}>Rencana Kerja</Text>
                         <Text style={styles.detailsText}>{presensi.presensi.Rencana_kerja}</Text>
-                        {/* <Button
-                            title={"lihat Foto"}
-                            color={"#264384"}
-                            style={{ fontFamily: 'Serifa-BT' }}
-                            /> */}
                         <TouchableOpacity
                             disabled={presensi.presensi.Foto_dtg == null ? true : false}
                             onPress={() => {
@@ -178,14 +173,6 @@ const HomePage = ({ navigation }) => {
                         <Text style={styles.detailsText}>{presensi.presensi.SN_OUT}</Text>
                         <Text style={styles.descriptionText}>Realisasi Kerja</Text>
                         <Text style={styles.detailsText}>{presensi.presensi.Realisasi_kerja}</Text>
-                        {/* <Button
-                            disabled={presensi.presensi.Foto_plg == null ? true : false}
-                            title={"lihat Foto"}
-                            onPress={() => {
-                                setProfileVisible(true)
-                            }}
-                            color={"#264384"}
-                        /> */}
                         <TouchableOpacity
                             disabled={presensi.presensi.Foto_plg == null ? true : false}
                             onPress={() => {

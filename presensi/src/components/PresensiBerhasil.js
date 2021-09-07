@@ -1,11 +1,14 @@
 import React from 'react';
 import { Text, View, Image, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import Img from '../assets/berhasil.png'
 
 const PresensiBerhasil = (props) => {
+    const navigation = useNavigation();
     setTimeout(() => {
         props.setBerhasilVisible(false)
+        navigation.navigate("HomepageScreen")
     }, 2500);
     return (
         <View style={styles.container}>

@@ -23,6 +23,7 @@ const Riwayat = ({ route }) => {
     const user = useSelector((state) => state.auth);
     const profile = useSelector((state) => state.profile);
     const history = useSelector((state) => state.history);
+    console.log('his', history);
 
     return (
         <View style={styles.container}>
@@ -45,7 +46,7 @@ const Riwayat = ({ route }) => {
                 <FlatList
                     showsVerticalScrollIndicator={false}
                     data={history.history}
-                    keyExtractor={(item) => item.id}
+                    keyExtractor={(item) => item.PIN}
                     renderItem={({ item }) => {
                         return (
                             <RiwayatCard
@@ -56,6 +57,8 @@ const Riwayat = ({ route }) => {
                                 jamP={item.ScanOut}
                                 lokP={item.SN_OUT}
                                 relK={item.Realisasi_kerja}
+                                fotD={item.Foto_dtg}
+                                fotP={item.Foto_plg}
                             />
                         )
                     }}

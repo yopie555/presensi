@@ -41,12 +41,14 @@ const presensi = ({ navigation }) => {
     const [loading, setLoading] = useState(false)
     const [loading2, setLoading2] = useState(false)
     const [berhasilVisible, setBerhasilVisible] = useState(false);
-    const submitPresensiD = () => {
+    const submitPresensiD = (latitude, longitude) => {
         const data = new FormData();
         data.append('file', { ...photo });
         data.append('username', user.auth.nip);
         data.append('lokasi_pulang', thisAddress.address.place_name);
         data.append('realisasi_kerja', rencana);
+        data.append('longitude', long);
+        data.append('latitude', lat);
         dispatch(pulangAction({ data, token: user.auth.token }));
     };
 
@@ -103,8 +105,8 @@ const presensi = ({ navigation }) => {
     })
         .then(location => {
             console.log(location);
-            // setLong(location.longitude);
-            // setLat(location.latitude)
+            setLong(location.longitude);
+            setLat(location.latitude)
             return location
         })
         .catch(error => {
@@ -179,6 +181,7 @@ const presensi = ({ navigation }) => {
                                             let response_getGeo = await getGeo()
                                             if (response_getGeo) {
                                                 address(response_getGeo.latitude, response_getGeo.longitude)
+                                                // submitPresensiD(response_getGeo.latitude, response_getGeo.longitude)
                                             }
                                             setLoading(false)
                                         }}
@@ -301,17 +304,17 @@ const styles = StyleSheet.create({
     },
     text: {
         color: '#264384',
-        fontFamily: 'Serifa-BT',
+        fontFamily: 'Poppins-Regular',
         fontSize: 16
     },
     textTitle: {
-        fontFamily: 'Serifa-Bold-BT',
+        fontFamily: 'SPoppins-Bold',
         fontSize: 24,
         color: '#264384',
         paddingVertical: 3
     },
     textTitle2: {
-        fontFamily: 'Serifa-Bold-BT',
+        fontFamily: 'Poppins-Bold',
         fontSize: 16,
         color: '#264384',
         // fontWeight: 'bold',
@@ -322,7 +325,7 @@ const styles = StyleSheet.create({
         borderColor: '#c4c4c4'
     },
     textJam: {
-        fontFamily: 'Serifa-BT',
+        fontFamily: 'Poppins-Regular',
         color: '#264384',
         paddingVertical: 3,
     },
@@ -426,7 +429,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         // fontWeight: 'bold',
         color: 'white',
-        fontFamily: 'Serifa-Bold-BT'
+        fontFamily: 'Poppins-Bold'
     },
     welcomeModal: {
         alignItems: 'center',

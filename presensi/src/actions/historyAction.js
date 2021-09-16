@@ -17,7 +17,7 @@ export const getHistoryFailure = (error) => ({
 });
 
 export const historyAction = (value) => {
-    console.log('value', value);
+    // console.log('value', value);
 
     return async (dispatch) => {
         try {

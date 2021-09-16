@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
         padding: 5,
         margin: '5%',
         color: '#264384',
-        fontFamily: 'Serifa-BT',
+        fontFamily: 'Poppins-Regular',
         fontSize: 18
     },
     icon: {

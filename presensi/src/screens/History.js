@@ -82,7 +82,7 @@ const History = ({ navigation }) => {
     };
     return (
         <View style={styles.container}>
-            <StatusBar hidden={true} />
+            {/* <StatusBar hidden={true} /> */}
             <ImageBackground
                 source={Background}
                 style={styles.background}>
@@ -230,18 +230,18 @@ const styles = StyleSheet.create({
     },
     textTitle: {
         fontSize: 20,
-        fontFamily: 'Serifa-Bold-BT',
+        fontFamily: 'Poppins-Bold',
         // fontWeight: 'bold',
         color: '#264384',
         marginVertical: 10
     },
     text: {
         color: '#264384',
-        fontFamily: 'Serifa-Bold-BT'
+        fontFamily: 'Poppins-Bold'
     },
     text2: {
         fontSize: 20,
-        fontFamily: 'Serifa-Bold-BT',
+        fontFamily: 'Poppins-Bold',
         color: '#c4c4c4',
         marginBottom: 8
     },
@@ -275,12 +275,12 @@ const styles = StyleSheet.create({
         marginLeft: 8,
         paddingLeft: 15,
         fontSize: 16,
-        fontFamily: 'Serifa-BT',
+        fontFamily: 'Poppins-Regular',
         color: '#000'
     },
     textHistory: {
         textAlign: 'center',
-        fontFamily: 'Serifa-BT'
+        fontFamily: 'Poppins-Regular'
     },
     datangButton: {
         flexDirection: 'row',
@@ -297,7 +297,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         // fontWeight: 'bold',
         color: 'white',
-        fontFamily: 'Serifa-Bold-BT'
+        fontFamily: 'Poppins-Bold'
     },
 })
 

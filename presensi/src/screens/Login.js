@@ -29,7 +29,7 @@ const Login = ({ navigation }) => {
     const dispatch = useDispatch();
     return (
         <View style={styles.container}>
-            <StatusBar hidden={true} />
+            {/* <StatusBar hidden={true} /> */}
             <ImageBackground
                 source={Background}
                 style={styles.background}
@@ -52,6 +52,7 @@ const Login = ({ navigation }) => {
                         />
                         <TextInput
                             style={styles.inputText}
+                            // autoCompleteType=
                             onChangeText={(nip) => setNip(nip)}
                             value={nip}
                             placeholder="Masukkan NIP/NIK"
@@ -135,7 +136,7 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 27,
         color: '#FFF',
-        fontFamily: 'Serifa-BT',
+        fontFamily: 'Poppins-Regular',
         marginBottom: 10
     },
     inputText: {
@@ -147,7 +148,7 @@ const styles = StyleSheet.create({
         marginLeft: 8,
         paddingLeft: 15,
         fontSize: 18,
-        fontFamily: 'Serifa-BT',
+        fontFamily: 'Poppins-Regular',
         color: '#000'
     },
     textContainer: {
@@ -167,7 +168,7 @@ const styles = StyleSheet.create({
     textLogin: {
         color: '#fff',
         fontSize: 22,
-        fontFamily: 'Serifa-BT'
+        fontFamily: 'Poppins-Regular'
     },
 })
 export default Login;

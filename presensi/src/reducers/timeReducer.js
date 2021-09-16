@@ -13,7 +13,7 @@ function timeReducer(state = initialState, action) {
                 loading: true,
             });
         case types.TIME_SUCCESS:
-            console.log('aa', action.payload);
+            // console.log('aa', action.payload);
             return Object.assign({}, state, {
                 loading: false,
                 time: action.payload,

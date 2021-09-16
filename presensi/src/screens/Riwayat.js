@@ -27,7 +27,7 @@ const Riwayat = ({ route }) => {
 
     return (
         <View style={styles.container}>
-            <StatusBar hidden={true} />
+            {/* <StatusBar hidden={true} /> */}
             <ImageBackground
                 source={Background}
                 style={styles.background}>
@@ -46,7 +46,7 @@ const Riwayat = ({ route }) => {
                 <FlatList
                     showsVerticalScrollIndicator={false}
                     data={history.history}
-                    keyExtractor={(item) => item.PIN}
+                    keyExtractor={(item) => item.Stats}
                     renderItem={({ item }) => {
                         return (
                             <RiwayatCard
@@ -93,13 +93,13 @@ const styles = StyleSheet.create({
     },
     header: {
         color: '#264384',
-        fontFamily: 'Serifa-BT',
+        fontFamily: 'Poppins-Regular',
         fontSize: 22,
         textAlign: 'center'
     },
     header2: {
         color: '#264384',
-        fontFamily: 'Serifa-BT',
+        fontFamily: 'Poppins-Regular',
         fontSize: 18,
         textAlign: 'center'
     },
@@ -117,18 +117,18 @@ const styles = StyleSheet.create({
     },
     textTitle: {
         fontSize: 20,
-        fontFamily: 'Serifa-Bold-BT',
+        fontFamily: 'Poppins-Bold',
         // fontWeight: 'bold',
         color: '#264384',
         marginVertical: 10
     },
     text: {
         color: '#264384',
-        fontFamily: 'Serifa-BT'
+        fontFamily: 'Poppins-Regular'
     },
     text2: {
         fontSize: 20,
-        fontFamily: 'Serifa-Bold-BT',
+        fontFamily: 'Poppins-Bold',
         color: '#c4c4c4',
         marginBottom: 8
     },

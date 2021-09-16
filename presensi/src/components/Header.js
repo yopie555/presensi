@@ -68,13 +68,13 @@ const Header = () => {
 const styles = StyleSheet.create({
     text: {
         color: '#264384',
-        fontFamily: 'Serifa-BT'
+        fontFamily: 'Poppins-Regular'
     },
     container: {
         width: '100%',
         height: 100,
-        marginTop: 160,
-        backgroundColor: '#DAC34D',
+        marginTop: 140,
+        backgroundColor: '#FCD54D',
         borderRadius: 8,
         alignItems: 'center',
         flexDirection: 'row'

@@ -22,11 +22,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { profileAction } from '../actions/profileAction';
 import { presensiAction } from '../actions/presensiAction';
 import { timeAction } from '../actions/timeAction';
-import { BASE_URL } from '../constants/general';
+import { BASE_URL, LOGIN_FAILURE } from '../constants/general';
 
 import Logo2 from '../assets/umrah.png'
 import Background from '../assets/background3.png'
-import { color } from 'react-native-elements/dist/helpers';
 
 
 
@@ -42,6 +41,9 @@ const HomePage = ({ navigation }) => {
     const [profileVisible2, setProfileVisible2] = useState(false);
     const [loading, setLoading] = useState(true)
     const [refreshing, setRefreshing] = React.useState(false);
+    console.log('timess', time);
+    console.log('press', presensi);
+
 
     const absen = async () => {
         await dispatch(presensiAction({ token: user.auth.token, nip: user.auth.nip })).then(() => setLoading(false));
@@ -61,10 +63,10 @@ const HomePage = ({ navigation }) => {
     }, []);
 
     useEffect(() => {
-        (async () => {
-            setLoading(true)
-            await dispatch(presensiAction({ token: user.auth.token, nip: user.auth.nip }))
-        })
+        // (async () => {
+        setLoading(true)
+        dispatch(presensiAction({ token: user.auth.token, nip: user.auth.nip }))
+        // })
         setLoading(false)
     }, []);
 
@@ -82,7 +84,7 @@ const HomePage = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <StatusBar hidden={true} />
+            {/* <StatusBar hidden={true} /> */}
             <Modal
                 animationType="slide"
                 transparent={true}
@@ -152,6 +154,10 @@ const HomePage = ({ navigation }) => {
                         <Text style={styles.detailsText}>{presensi.presensi.SN_IN}</Text>
                         <Text style={styles.descriptionText}>Rencana Kerja</Text>
                         <Text style={styles.detailsText}>{presensi.presensi.Rencana_kerja}</Text>
+                        <Text style={styles.descriptionText}>Status</Text>
+                        {presensi.presensi.WorkMode == 0 ?
+                            <Text style={styles.detailsText}>WFO</Text> : <Text style={styles.detailsText}>WFH</Text>
+                        }
                         <TouchableOpacity
                             disabled={presensi.presensi.Foto_dtg == null ? true : false}
                             onPress={() => {
@@ -173,6 +179,10 @@ const HomePage = ({ navigation }) => {
                         <Text style={styles.detailsText}>{presensi.presensi.SN_OUT}</Text>
                         <Text style={styles.descriptionText}>Realisasi Kerja</Text>
                         <Text style={styles.detailsText}>{presensi.presensi.Realisasi_kerja}</Text>
+                        <Text style={styles.descriptionText}>Status</Text>
+                        {presensi.presensi.WorkMode == 0 ?
+                            <Text style={styles.detailsText}>WFO</Text> : <Text style={styles.detailsText}>WFH</Text>
+                        }
                         <TouchableOpacity
                             disabled={presensi.presensi.Foto_plg == null ? true : false}
                             onPress={() => {
@@ -280,23 +290,24 @@ const styles = StyleSheet.create({
     },
     header: {
         color: '#264384',
-        fontFamily: 'Serifa-BT',
+        fontFamily: 'Poppins-SemiBold',
         fontSize: 22,
-        textAlign: 'center'
+        textAlign: 'center',
+        paddingVertical: 5
     },
     text: {
         color: '#264384',
-        fontFamily: 'Serifa-BT'
+        fontFamily: 'Poppins-Regular'
     },
     text1: {
         color: '#264384',
-        fontFamily: 'Serifa-BT',
+        fontFamily: 'Poppins-Regular',
         fontSize: 14,
         textAlign: 'center'
     },
     text2: {
         color: '#264384',
-        fontFamily: 'Serifa-BT',
+        fontFamily: 'Poppins-Regular',
         fontSize: 24,
         textAlign: 'center'
     },
@@ -306,13 +317,13 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginTop: 5,
         paddingHorizontal: '5%',
-        fontFamily: 'Serifa-Bold-BT'
+        fontFamily: 'Poppins-Bold'
     },
     detailsText: {
         color: '#77797D',
         textAlign: 'justify',
         paddingHorizontal: '5%',
-        fontFamily: 'Serifa-BT'
+        fontFamily: 'Poppins-Regular'
     },
     btn1: {
         backgroundColor: '#264384',
@@ -385,11 +396,11 @@ const styles = StyleSheet.create({
         borderColor: '#c4c4c4'
     },
     txtFoto: {
-        fontFamily: 'Serifa-BT',
+        fontFamily: 'Poppins-Regular',
         color: '#fff'
     },
     txtFotoD: {
-        fontFamily: 'Serifa-BT',
+        fontFamily: 'Poppins-Regular',
         color: '#000'
     },
 })

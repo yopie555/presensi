@@ -58,7 +58,7 @@ export const getPulangFailure = (error) => ({
 });
 
 export const pulangAction = (payload) => {
-    console.log('pay', payload);
+    // console.log('pay', payload);
     return async (dispatch) => {
         try {
             dispatch(getPulangRequest());
@@ -77,7 +77,7 @@ export const pulangAction = (payload) => {
             dispatch(getPulangSuccess(res.data));
 
         } catch (error) {
-            console.log('Get datang Error', error);
+            console.log('Get pulang Error', error);
             dispatch(getPulangFailure(error));
         }
     };

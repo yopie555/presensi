@@ -41,7 +41,7 @@ const RiwayatCard = (props) => {
                 <Text style={styles.text}>{props.tgl}</Text>
             </View>
             <View style={styles.containerT}>
-                <Text style={styles.text}>Jam Datang      : </Text>
+                <Text style={styles.text}>Jam Datang     : </Text>
                 <Text style={styles.text}>{props.jamD}</Text>
             </View>
             <View style={styles.containerT}>
@@ -49,7 +49,7 @@ const RiwayatCard = (props) => {
                 <Text style={styles.text} >{props.lokD}</Text>
             </View>
             <View style={styles.containerT}>
-                <Text style={styles.text}>Rencana Kerja  : </Text>
+                <Text style={styles.text}>Rencana Kerja : </Text>
                 <Text style={styles.text}>{props.renK}</Text>
             </View>
             <View style={styles.containerT}>
@@ -57,7 +57,7 @@ const RiwayatCard = (props) => {
                 <Text style={styles.text}>{props.jamP}</Text>
             </View>
             <View style={styles.containerT}>
-                <Text style={styles.text}>Lokasi Pulang  : </Text>
+                <Text style={styles.text}>Lokasi Pulang   : </Text>
                 <Text style={styles.text}>{props.lokP}</Text>
             </View>
             <View style={styles.containerT}>
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
         marginVertical: 5
     },
     text: {
-        fontFamily: 'Serifa-BT'
+        fontFamily: 'Poppins-Regular'
     },
     datangButton2: {
         backgroundColor: '#264384',
@@ -120,13 +120,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#c4c4c4',
         borderRadius: 8,
         paddingVertical: 5,
-        paddingHorizontal: 35
+        paddingHorizontal: 30
     },
     datangText: {
         fontSize: 16,
         // fontWeight: 'bold',
         color: 'white',
-        fontFamily: 'Serifa-Bold-BT'
+        fontFamily: 'Poppins-Bold'
     },
     modalContainerImage: {
         alignItems: 'center',

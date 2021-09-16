@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
         marginBottom: 15
     },
     text: {
-        fontFamily: 'Serifa-Bold-BT',
+        fontFamily: 'Poppins-Bold',
         fontSize: 18,
         color: '#264384'
     },

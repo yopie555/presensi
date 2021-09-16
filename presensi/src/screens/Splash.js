@@ -13,7 +13,7 @@ function SplashScreen({ navigation }) {
     }, 3000);
     return (
         <View style={styles.container}>
-            <StatusBar hidden={true} />
+            {/* <StatusBar hidden={true} /> */}
             <ImageBackground
                 source={Background}
                 style={styles.background}
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     text: {
         color: '#FFF',
         fontSize: 34,
-        fontFamily: 'Serifa-Bold-BT',
+        fontFamily: 'Poppins-Bold',
         // fontWeight: 'bold',
         textAlign: 'center',
         color: '#DAC34D'

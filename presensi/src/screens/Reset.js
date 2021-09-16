@@ -32,7 +32,7 @@ const Reset = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <StatusBar hidden={true} />
+            {/* <StatusBar hidden={true} /> */}
             <ImageBackground
                 source={Background}
                 style={styles.background}>
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     },
     textHistory: {
         textAlign: 'center',
-        fontFamily: 'Serifa-BT'
+        fontFamily: 'Poppins-Regular'
     },
     inputText: {
         // width: '94%',
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         paddingLeft: 15,
         fontSize: 18,
-        fontFamily: 'Serifa-BT'
+        fontFamily: 'Poppins-Regular'
     },
     loginBtn: {
         width: '90%',
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
     textLogin: {
         color: '#fff',
         fontSize: 22,
-        fontFamily: 'Serifa-BT'
+        fontFamily: 'Poppins-Regular'
     },
 })
 export default Reset;

@@ -194,7 +194,7 @@ const presensi = ({ navigation }) => {
                                         {loading ? <View>
                                             <ActivityIndicator size="large" color="#DAC34D" />
                                         </View> :
-                                            <Text style={{ color: 'white', fontFamily: 'Serifa-BT' }}>Alamat</Text>
+                                            <Text style={{ color: 'white', fontFamily: 'Poppins-Regular' }}>Alamat</Text>
                                         }
                                     </TouchableOpacity>
                                 </View>
@@ -308,7 +308,7 @@ const styles = StyleSheet.create({
         fontSize: 16
     },
     textTitle: {
-        fontFamily: 'SPoppins-Bold',
+        fontFamily: 'Poppins-Bold',
         fontSize: 24,
         color: '#264384',
         paddingVertical: 3
@@ -346,7 +346,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         marginLeft: 8,
         paddingHorizontal: 10,
-        fontFamily: 'Serifa-BT',
+        fontFamily: 'Poppins-Regular',
         color: "#000"
     },
     btn1: {

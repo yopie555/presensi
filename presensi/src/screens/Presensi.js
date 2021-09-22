@@ -190,7 +190,7 @@ const presensi = ({ navigation }) => {
                                             size={30}
                                             color="white"
                                         />
-                                        <Text style={{ color: 'white', fontFamily: "Serifa-BT" }}>Alamat</Text>
+                                        <Text style={{ color: 'white', fontFamily: "Poppins-Regular" }}>Alamat</Text>
                                     </TouchableOpacity>
                                 </View>
                             </View>
@@ -341,7 +341,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         marginLeft: 8,
         paddingHorizontal: 10,
-        fontFamily: 'Poppins-Bold',
+        fontFamily: 'Poppins-Regular',
         color: "#000"
     },
     btn1: {

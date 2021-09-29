@@ -40,4 +40,4 @@ export const RESET_FAILURE = 'RESET_FAILURE';
 
 export const mapApi = 'pk.eyJ1IjoibjNybzU1NSIsImEiOiJja3Nib2xycWIwOHJqMnRxazdmeHR1Zm81In0.CVAlhyoxkiRsVq8U4khzuQ'
 
-export const BASE_URL = 'http://36.66.35.6:10'
+export const BASE_URL = 'https://api-presensi.umrah.ac.id'

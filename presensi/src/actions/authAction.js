@@ -3,6 +3,7 @@ import axios from 'axios';
 import { BASE_URL } from '../constants/general';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+
 export const getLoginRequest = () => ({
     type: types.LOGIN_REQUEST,
 });
@@ -40,7 +41,7 @@ export const loginAction = (value) => {
             await AsyncStorage.setItem('pass', value.password);
             dispatch(getLoginSuccess({ token: res.data.result.token, nip: value.nip, password: value.password }));
         } catch (error) {
-            console.log('Get Address Error', error.response.data);
+            console.log('Get Address Error', error);
             dispatch(getLoginFailure(error));
         }
     };

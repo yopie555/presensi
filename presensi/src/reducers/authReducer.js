@@ -9,7 +9,7 @@ const initialState = {
 function addressReducer(state = initialState, action) {
     switch (action.type) {
         case types.LOGIN_REQUEST:
-            console.log('req');
+            // console.log('req');
             return Object.assign({}, state, {
                 loading: true,
             });

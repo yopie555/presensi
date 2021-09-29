@@ -6122,6 +6122,15 @@ react-native-calendars@^1.1264.0:
   optionalDependencies:
     moment "^2.24.0"
 
+react-native-cert-pinner@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/react-native-cert-pinner/-/react-native-cert-pinner-0.4.1.tgz#648fe63fdbf892bcda1f8e60a868764f3c7e4cf1"
+  integrity sha512-v1QXPFR7X/o6DI0eDheR63y/sUq26GtuPIH7dqO5a1Vbm4L+AeX17fjoLmwdju/lCoTxEpyQRPkY4vPB/NNxSQ==
+  dependencies:
+    chalk "^2.4.1"
+    minimist "^1.2.0"
+    plist "^3.0.1"
+
 react-native-elements@^3.4.2:
   version "3.4.2"
   resolved "https://registry.npmjs.org/react-native-elements/-/react-native-elements-3.4.2.tgz"

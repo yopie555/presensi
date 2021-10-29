@@ -154,10 +154,6 @@ const HomePage = ({ navigation }) => {
                         <Text style={styles.detailsText}>{presensi.presensi.SN_IN}</Text>
                         <Text style={styles.descriptionText}>Rencana Kerja</Text>
                         <Text style={styles.detailsText}>{presensi.presensi.Rencana_kerja}</Text>
-                        <Text style={styles.descriptionText}>Status</Text>
-                        {presensi.presensi.WorkMode == 0 ?
-                            <Text style={styles.detailsText}>WFO</Text> : <Text style={styles.detailsText}>WFH</Text>
-                        }
                         <TouchableOpacity
                             disabled={presensi.presensi.Foto_dtg == null ? true : false}
                             onPress={() => {
@@ -179,10 +175,6 @@ const HomePage = ({ navigation }) => {
                         <Text style={styles.detailsText}>{presensi.presensi.SN_OUT}</Text>
                         <Text style={styles.descriptionText}>Realisasi Kerja</Text>
                         <Text style={styles.detailsText}>{presensi.presensi.Realisasi_kerja}</Text>
-                        <Text style={styles.descriptionText}>Status</Text>
-                        {presensi.presensi.WorkMode == 0 ?
-                            <Text style={styles.detailsText}>WFO</Text> : <Text style={styles.detailsText}>WFH</Text>
-                        }
                         <TouchableOpacity
                             disabled={presensi.presensi.Foto_plg == null ? true : false}
                             onPress={() => {

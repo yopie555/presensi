@@ -74,6 +74,8 @@ const presensi = ({ navigation }) => {
 
             mediaType: 'photo',
             includeBase64: false,
+            maxWidth: 360,
+            maxHeight: 480,
 
             // includeBase64: true
         };
@@ -236,6 +238,7 @@ const presensi = ({ navigation }) => {
                                             else {
                                                 setLoading(true)
                                                 await submitPresensiD()
+                                                await dispatch(presensiAction({ token: user.auth.token, nip: user.auth.nip }));
                                                 setLoading(false)
                                                 setBerhasilVisible(true)
                                             }

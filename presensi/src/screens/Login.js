@@ -95,6 +95,19 @@ const Login = ({ navigation }) => {
                         }
                     </TouchableOpacity>
                 </View>
+                <View style={styles.btnPanduan}>
+                    <TouchableOpacity
+                        style={styles.iconPanduan}
+                        onPress={() => navigation.navigate("PanduanScreen")}
+                    >
+                        <Icon
+                            name='book-outline'
+                            size={35}
+                            color={"#264384"}
+                        />
+                    </TouchableOpacity>
+                    <Text style={styles.panduan}>Panduan Aplikasi</Text>
+                </View>
             </ImageBackground>
         </View>
     );
@@ -170,5 +183,22 @@ const styles = StyleSheet.create({
         fontSize: 22,
         fontFamily: 'Poppins-Regular'
     },
+    btnPanduan: {
+        position: 'absolute',
+        bottom: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 50
+    },
+    panduan: {
+        color: '#FFF',
+        fontFamily: 'Poppins-Bold',
+        fontSize: 9
+    },
+    iconPanduan: {
+        backgroundColor: '#FFF',
+        borderRadius: 50,
+        padding: 5
+    }
 })
 export default Login;

@@ -17,6 +17,7 @@ import RiwayatScreen from './src/screens/Riwayat'
 import PresensiScreen from './src/screens/Presensi'
 import PresensiScreen2 from './src/screens/Presensi2'
 import ResetScreen from './src/screens/Reset'
+import PanduanScreen from './src/screens/Panduan'
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -59,6 +60,7 @@ const authScreen = () => {
     <Stack.Navigator headerMode="none">
       <Stack.Screen name="SplashScreen" component={SplashScreen} />
       <Stack.Screen name="LoginScreen" component={LoginScreen} />
+      <Stack.Screen name="PanduanScreen" component={PanduanScreen} />
     </Stack.Navigator>
   )
 }

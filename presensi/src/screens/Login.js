@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 5,
         alignItems: 'center',
-        justifyContent: 'center',
+        // justifyContent: 'center',
         borderRadius: 50
     },
     panduan: {

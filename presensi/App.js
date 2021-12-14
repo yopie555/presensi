@@ -10,7 +10,6 @@ import { checkLogin } from './src/actions/authAction';
 
 import SplashScreen from './src/screens/Splash'
 import LoginScreen from './src/screens/Login'
-import HomepageScreen from './src/screens/Homepage'
 import HomepageScreen2 from './src/screens/Homepage2'
 import HistoryScreen from './src/screens/History'
 import RiwayatScreen from './src/screens/Riwayat'

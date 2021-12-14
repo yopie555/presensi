@@ -56,9 +56,19 @@ const presensi = ({ navigation }) => {
     const address = (latitude, longitude) => {
         dispatch(addressAction({ latitude: latitude, longitude: longitude }))
     }
-    // useEffect(() => {
-    //     getGeo()
-    // }, [])
+
+    useEffect(() => {
+        (async () => {
+            setLoading(true)
+            let response_getGeo = await getGeo()
+            if (response_getGeo) {
+                address(response_getGeo.latitude, response_getGeo.longitude)
+                // submitPresensiD(response_getGeo.latitude, response_getGeo.longitude)
+            }
+            console.log('qwe', response_getGeo);
+            setLoading(false)
+        })();
+    }, [])
 
     const thisAddress = useSelector((state) => state.address);
     const user = useSelector((state) => state.auth);
@@ -176,7 +186,7 @@ const presensi = ({ navigation }) => {
                                     <Text style={styles.textGeo}>
                                         {thisAddress.address.place_name}
                                     </Text>
-                                    <TouchableOpacity
+                                    {/* <TouchableOpacity
                                         style={styles.btn4}
                                         onPress={async () => {
                                             setLoading(true)
@@ -198,7 +208,7 @@ const presensi = ({ navigation }) => {
                                         </View> :
                                             <Text style={{ color: 'white', fontFamily: 'Poppins-Regular' }}>Alamat</Text>
                                         }
-                                    </TouchableOpacity>
+                                    </TouchableOpacity> */}
                                 </View>
                             </View>
                             <ScrollView style={styles.container8}>
@@ -288,17 +298,17 @@ const styles = StyleSheet.create({
     container6: {
         width: wp('95%'),
         alignItems: 'center',
-        borderColor: '#c4c4c4',
-        marginBottom: 15
+        // borderColor: '#c4c4c4',
+        marginBottom: 15,
     },
     container7: {
         flexDirection: 'row',
-        marginVertical: 5
+        marginVertical: 5,
     },
     container8: {
-        borderWidth: 1,
+        // borderWidth: 1,
         width: wp('87%'),
-        borderColor: '#c4c4c4',
+        // borderColor: '#c4c4c4',
         marginBottom: 10
     },
     container9: {
@@ -322,23 +332,23 @@ const styles = StyleSheet.create({
         color: '#264384',
         // fontWeight: 'bold',
         paddingVertical: 3,
-        borderWidth: 1,
-        paddingVertical: 5,
-        paddingHorizontal: 15,
-        borderColor: '#c4c4c4'
+        // borderWidth: 1,
+        paddingHorizontal: 10,
+        // borderColor: '#c4c4c4'
     },
     textJam: {
-        fontFamily: 'Poppins-Regular',
+        fontFamily: 'Poppins-Bold',
         color: '#264384',
         paddingVertical: 3,
     },
     textGeo: {
         borderWidth: 1,
-        width: wp('70%'),
+        width: wp('80%'),
         borderRadius: 5,
         paddingVertical: 14,
         paddingHorizontal: 10,
-        fontSize: 18
+        fontSize: 18,
+        borderColor: "#264384"
     },
     inputText2: {
         width: '95%',

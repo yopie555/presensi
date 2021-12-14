@@ -71,7 +71,9 @@ const HomePage = ({ navigation }) => {
     }, []);
 
     useEffect(() => {
+        setLoading(true)
         dispatch(timeAction({ token: user.auth.token, nip: user.auth.nip }));
+        setLoading(false)
     }, []);
 
     if (loading == true) {

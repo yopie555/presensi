@@ -125,6 +125,7 @@ const presensi = ({ navigation }) => {
             const { code, message } = error;
             console.warn(code, message);
             Alert.alert('Turn On Your Location')
+            navigation.navigate('HomepageScreen')
         })
 
     return (

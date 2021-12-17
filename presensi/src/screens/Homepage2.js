@@ -18,6 +18,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import Header from '../components/Header';
 import WelcomeModal from '../components/WelcomeModal';
 import PresensiModal from '../components/PresensiModal';
+import ErrorModal from '../components/ErrorModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { profileAction } from '../actions/profileAction';
 import { presensiAction } from '../actions/presensiAction';
@@ -26,6 +27,7 @@ import { BASE_URL, LOGIN_FAILURE } from '../constants/general';
 
 import Logo2 from '../assets/umrah.png'
 import Background from '../assets/background3.png'
+import { removeValue } from '../helper';
 
 
 
@@ -39,10 +41,11 @@ const HomePage = ({ navigation }) => {
     const time = useSelector((state) => state.time)
     const [profileVisible, setProfileVisible] = useState(false);
     const [profileVisible2, setProfileVisible2] = useState(false);
+    const [ErrorVisible, setErrorVisible] = useState(false);
     const [loading, setLoading] = useState(true)
     const [refreshing, setRefreshing] = React.useState(false);
-    console.log('timess', time);
-    console.log('press', presensi);
+    // console.log('timess', time);
+    // console.log('press', presensi);
 
 
     const absen = async () => {
@@ -63,10 +66,10 @@ const HomePage = ({ navigation }) => {
     }, []);
 
     useEffect(() => {
-        // (async () => {
-        setLoading(true)
-        dispatch(presensiAction({ token: user.auth.token, nip: user.auth.nip }))
-        // })
+        (async () => {
+            setLoading(true)
+            dispatch(presensiAction({ token: user.auth.token, nip: user.auth.nip }))
+        })
         setLoading(false)
     }, []);
 

@@ -38,6 +38,10 @@ export const RESET_REQUEST = 'RESET_REQUEST';
 export const RESET_SUCCESS = 'RESET_SUCCESS';
 export const RESET_FAILURE = 'RESET_FAILURE';
 
+export const LOCATION_REQUEST = 'LOCATION_REQUEST';
+export const LOCATION_SUCCESS = 'LOCATION_SUCCESS';
+export const LOCATION_FAILURE = 'LOCATION_FAILURE';
+
 export const mapApi = 'pk.eyJ1IjoibjNybzU1NSIsImEiOiJja3Nib2xycWIwOHJqMnRxazdmeHR1Zm81In0.CVAlhyoxkiRsVq8U4khzuQ'
 
 export const BASE_URL = 'https://api-presensi.umrah.ac.id'

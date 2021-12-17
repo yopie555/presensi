@@ -20,12 +20,14 @@ import GetLocation from 'react-native-get-location'
 import { launchCamera } from 'react-native-image-picker';
 import { useDispatch, useSelector } from 'react-redux';
 import { addressAction } from '../actions/addressAction'
+import { locationAction } from '../actions/locationAction'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import FormData from 'form-data';
 import { datangAction, pulangAction } from '../actions/datangAction';
 import { presensiAction } from '../actions/presensiAction';
 import BerhasilModal from '../components/PresensiBerhasil'
+import LocationModal from '../components/LocationModal';
 
 import Logo2 from '../assets/umrah.png'
 import Background from '../assets/background4.png'
@@ -41,6 +43,7 @@ const presensi = ({ navigation }) => {
     const [loading, setLoading] = useState(false)
     const [loading2, setLoading2] = useState(false)
     const [berhasilVisible, setBerhasilVisible] = useState(false);
+    const [locVisible, setLocVisible] = useState(true);
     const submitPresensiD = (latitude, longitude) => {
         const data = new FormData();
         data.append('file', { ...photo });
@@ -54,6 +57,7 @@ const presensi = ({ navigation }) => {
 
     const dispatch = useDispatch();
     const address = (latitude, longitude) => {
+        dispatch(locationAction({ latitude: latitude, longitude: longitude, token: user.auth.token, nip: user.auth.nip }));
         dispatch(addressAction({ latitude: latitude, longitude: longitude }))
     }
 
@@ -132,7 +136,18 @@ const presensi = ({ navigation }) => {
         <KeyboardAvoidingView>
             <ScrollView bounces={false}>
                 <View style={styles.container}>
-                    <StatusBar hidden={true} />
+                    {/* <StatusBar hidden={true} /> */}
+                    <Modal
+                        animationType="slide"
+                        transparent={true}
+                        visible={locVisible}
+                        onRequestClose={() => {
+                            setLocVisible(false);
+                        }}>
+                        <View style={styles.welcomeModal}>
+                            <LocationModal setLocVisible={setLocVisible} />
+                        </View>
+                    </Modal>
                     <Modal
                         animationType="slide"
                         transparent={true}

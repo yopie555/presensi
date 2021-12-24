@@ -41,18 +41,18 @@ const RiwayatCard = (props) => {
                 <Text style={styles.text}>{props.tgl}</Text>
             </View>
             <View style={styles.containerT}>
-                <Text style={styles.text}>Jam Datang     : </Text>
+                <Text style={styles.text}>Jam                    : </Text>
                 <Text style={styles.text}>{props.jamD}</Text>
             </View>
             <View style={styles.containerT}>
-                <Text style={styles.text}>Lokasi Datang  : </Text>
+                <Text style={styles.text}>Lokasi                 : </Text>
                 <Text style={styles.text} >{props.lokD}</Text>
             </View>
             <View style={styles.containerT}>
-                <Text style={styles.text}>Rencana Kerja : </Text>
+                <Text style={styles.text}>Detail Kerja       : </Text>
                 <Text style={styles.text}>{props.renK}</Text>
             </View>
-            <View style={styles.containerT}>
+            {/* <View style={styles.containerT}>
                 <Text style={styles.text}>Jam Pulang      : </Text>
                 <Text style={styles.text}>{props.jamP}</Text>
             </View>
@@ -63,8 +63,8 @@ const RiwayatCard = (props) => {
             <View style={styles.containerT}>
                 <Text style={styles.text}>Realisasi Kerja : </Text>
                 <Text style={styles.text}>{props.relK}</Text>
-            </View>
-            <View style={styles.containerButton}>
+            </View> */}
+            {/* <View style={styles.containerButton}>
                 <TouchableOpacity
                     disabled={props.fotD === null ? true : false}
                     style={props.fotD === null ? styles.datangButton : styles.datangButton2}
@@ -83,7 +83,7 @@ const RiwayatCard = (props) => {
                 >
                     <Text style={styles.datangText}>Foto Pulang</Text>
                 </TouchableOpacity>
-            </View>
+            </View> */}
         </View>
     );
 }

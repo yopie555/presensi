@@ -50,15 +50,15 @@ const Riwayat = ({ route }) => {
                     renderItem={({ item }) => {
                         return (
                             <RiwayatCard
-                                tgl={item.ScanDateIn}
-                                jamD={item.ScanIn}
-                                lokD={item.SN_IN}
-                                renK={item.Rencana_kerja}
-                                jamP={item.ScanOut}
-                                lokP={item.SN_OUT}
-                                relK={item.Realisasi_kerja}
-                                fotD={item.Foto_dtg}
-                                fotP={item.Foto_plg}
+                                tgl={item.ScanDate}
+                                jamD={item.ScanTime}
+                                lokD={item.SN}
+                                renK={item.detail_kerja}
+                            // jamP={item.ScanOut}
+                            // lokP={item.SN_OUT}
+                            // relK={item.Realisasi_kerja}
+                            // fotD={item.Foto_dtg}
+                            // fotP={item.Foto_plg}
                             />
                         )
                     }}

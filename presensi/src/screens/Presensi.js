@@ -56,9 +56,10 @@ const presensi = ({ navigation }) => {
     };
 
     const address = (latitude, longitude) => {
-        dispatch(locationAction({ latitude: latitude, longitude: longitude, token: user.auth.token, nip: user.auth.nip }));
+        dispatch(locationAction({ latitude: latitude, longitude: longitude, token: user.auth.token, nip: user.auth.nip, ip: ip.ip }));
         dispatch(addressAction({ latitude: latitude, longitude: longitude }))
     }
+
 
     useEffect(() => {
         (async () => {
@@ -75,6 +76,7 @@ const presensi = ({ navigation }) => {
 
     const thisAddress = useSelector((state) => state.address);
     const user = useSelector((state) => state.auth);
+    const ip = useSelector((state) => state.ip);
 
 
     setInterval(() => {
@@ -241,7 +243,10 @@ const presensi = ({ navigation }) => {
                                             // setLoading(true)
                                             // await dispatch(presensiAction({ token: user.auth.token, nip: user.auth.nip }));
                                             // setLoading(false)
-                                            navigation.navigate("HomepageScreen")
+                                            navigation.reset({
+                                                index: 0,
+                                                routes: [{ name: 'HomepageScreen' }],
+                                            });
                                         }}>
                                         <Text style={styles.datangText}>Tutup</Text>
                                     </TouchableOpacity>

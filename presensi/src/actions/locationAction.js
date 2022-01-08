@@ -26,6 +26,7 @@ export const locationAction = (value) => {
             const res = await axios.post(
                 url,
                 {
+                    ip: value.ip,
                     longitude: value.longitude,
                     latitude: value.latitude
                 },
@@ -35,7 +36,7 @@ export const locationAction = (value) => {
                     },
                 }
             );
-            // console.log('ini res search', res.data);
+            console.log('ini location', res.data);
             dispatch(getLocationSuccess(res.data));
         } catch (error) {
             console.log('Get Location Error', error.response.data);

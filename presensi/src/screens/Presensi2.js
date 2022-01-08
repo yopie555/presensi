@@ -57,7 +57,7 @@ const presensi = ({ navigation }) => {
 
     const dispatch = useDispatch();
     const address = (latitude, longitude) => {
-        dispatch(locationAction({ latitude: latitude, longitude: longitude, token: user.auth.token, nip: user.auth.nip }));
+        dispatch(locationAction({ latitude: latitude, longitude: longitude, token: user.auth.token, nip: user.auth.nip, ip: ip.ip }));
         dispatch(addressAction({ latitude: latitude, longitude: longitude }))
     }
 
@@ -76,6 +76,7 @@ const presensi = ({ navigation }) => {
 
     const thisAddress = useSelector((state) => state.address);
     const user = useSelector((state) => state.auth);
+    const ip = useSelector((state) => state.ip);
 
 
     setInterval(() => {

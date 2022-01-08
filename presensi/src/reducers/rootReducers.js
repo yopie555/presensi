@@ -6,6 +6,7 @@ import presensiReducer from './presensiReducer';
 import timeReducer from './timeReducer';
 import historyReducer from './historyReducer';
 import locationReducer from './locationReducer';
+import ipReducer from './ipReducer';
 
 const rootReducer = combineReducers({
     address: addressReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
     time: timeReducer,
     history: historyReducer,
     location: locationReducer,
+    ip: ipReducer,
 })
 
 export default rootReducer

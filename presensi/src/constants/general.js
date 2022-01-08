@@ -42,6 +42,11 @@ export const LOCATION_REQUEST = 'LOCATION_REQUEST';
 export const LOCATION_SUCCESS = 'LOCATION_SUCCESS';
 export const LOCATION_FAILURE = 'LOCATION_FAILURE';
 
+export const IP_REQUEST = 'IP_REQUEST';
+export const IP_SUCCESS = 'IP_SUCCESS';
+export const IP_FAILURE = 'IP_FAILURE';
+
+
 export const mapApi = 'pk.eyJ1IjoibjNybzU1NSIsImEiOiJja3Nib2xycWIwOHJqMnRxazdmeHR1Zm81In0.CVAlhyoxkiRsVq8U4khzuQ'
 
 export const BASE_URL = 'https://api-presensi.umrah.ac.id'

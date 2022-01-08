@@ -23,6 +23,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { profileAction } from '../actions/profileAction';
 import { presensiAction } from '../actions/presensiAction';
 import { timeAction } from '../actions/timeAction';
+import { ipAction } from '../actions/ipAction';
 import { BASE_URL, LOGIN_FAILURE } from '../constants/general';
 
 import Logo2 from '../assets/umrah.png'
@@ -38,6 +39,7 @@ const HomePage = ({ navigation }) => {
     const user = useSelector((state) => state.auth);
     const profile = useSelector((state) => state.profile)
     const presensi = useSelector((state) => state.presensi)
+    const ip = useSelector((state) => state.ip)
     const time = useSelector((state) => state.time)
     const [profileVisible, setProfileVisible] = useState(false);
     const [profileVisible2, setProfileVisible2] = useState(false);
@@ -45,11 +47,12 @@ const HomePage = ({ navigation }) => {
     const [loading, setLoading] = useState(true)
     const [refreshing, setRefreshing] = React.useState(false);
     // console.log('timess', time);
-    // console.log('press', presensi);
+    // console.log('ip', ip.ip);
 
 
     const absen = async () => {
         await dispatch(presensiAction({ token: user.auth.token, nip: user.auth.nip })).then(() => setLoading(false));
+        await dispatch(ipAction())
     }
 
     const wait = (timeout) => {
@@ -58,8 +61,12 @@ const HomePage = ({ navigation }) => {
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
-        wait(2000).then(() => setRefreshing(false));
+        wait(3000).then(() => setRefreshing(false));
     }, []);
+
+    useEffect(() => {
+        absen()
+    }, [])
 
     useEffect(() => {
         dispatch(profileAction({ token: user.auth.token, nip: user.auth.nip }));
@@ -80,6 +87,14 @@ const HomePage = ({ navigation }) => {
     }, []);
 
     if (loading == true) {
+        return (
+            <View style={styles.loading}>
+                <ActivityIndicator size="large" color="#DAC34D" />
+            </View>
+        );
+    }
+
+    if (setRefreshing === true) {
         return (
             <View style={styles.loading}>
                 <ActivityIndicator size="large" color="#DAC34D" />

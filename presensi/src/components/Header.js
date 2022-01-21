@@ -10,7 +10,8 @@ import {
     ScrollView,
     Modal,
     Button,
-    ToastAndroid
+    ToastAndroid,
+    Alert
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch, useSelector } from 'react-redux';
@@ -25,6 +26,23 @@ const Header = () => {
     const user = useSelector((state) => state.auth);
     const profile = useSelector((state) => state.profile)
     const presensi = useSelector((state) => state.presensi)
+    console.log('profiles', profile);
+
+    // if (profile.error) {
+    //     removeValue(),
+    //         // Alert.alert('Error', profile.error, [{ text: 'OK' }])
+    //         () => navigation.navigate('LoginScreen') && ToastAndroid.show('Anda harus login terlebih dahulu', ToastAndroid.SHORT)
+    //     // dispatch(logoutAction())
+    // }
+
+    {
+        profile.error &&
+            removeValue()
+        if (profile.error) {
+            ToastAndroid.show('Terjadi Kesalahan, Silahkan Login Kembali', ToastAndroid.SHORT) && dispatch(logoutAction()) && navigation.navigate('LoginScreen')
+            // Alert.alert("Terjadi Kesalahan, Silahkan Login Kembali"),
+        }
+    }
     return (
         <View style={styles.container}>
             <Icon

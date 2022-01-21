@@ -46,7 +46,7 @@ const HomePage = ({ navigation }) => {
     const [ErrorVisible, setErrorVisible] = useState(false);
     const [loading, setLoading] = useState(true)
     const [refreshing, setRefreshing] = React.useState(false);
-    // console.log('timess', time);
+    console.log('timess', time.time);
     // console.log('ip', ip.ip);
 
 
@@ -213,8 +213,8 @@ const HomePage = ({ navigation }) => {
                 <View style={styles.container9}>
                     <TouchableOpacity
                         onPress={() => navigation.navigate("PresensiScreen")}
-                        style={time.time.cek_dtg == 0 || presensi.presensi.SN_IN != null ? styles.disabledButton : styles.datangButton}
-                        disabled={time.time.cek_dtg == 0 || presensi.presensi.SN_IN != null ? true : false}
+                        style={time.time.cek == 0 || time.time.cek_dtg == 0 || presensi.presensi.SN_IN != null ? styles.disabledButton : styles.datangButton}
+                        disabled={time.time.cek == 0 || time.time.cek_dtg == 0 || presensi.presensi.SN_IN != null ? true : false}
                     >
                         <Text
                             style={time.time.cek_dtg == 0 || presensi.presensi.SN_IN != null ? styles.txtFotoD : styles.txtFoto}
@@ -224,8 +224,8 @@ const HomePage = ({ navigation }) => {
                     </TouchableOpacity>
                     <TouchableOpacity
                         onPress={() => navigation.navigate("PresensiScreen2")}
-                        style={time.time.cek_plg == 0 || presensi.presensi.SN_OUT != null ? styles.disabledButton : styles.pulangButton}
-                        disabled={time.time.cek_plg == 0 || presensi.presensi.SN_OUT != null ? true : false}
+                        style={time.time.cek == 0 || time.time.cek_plg == 0 || presensi.presensi.SN_OUT != null ? styles.disabledButton : styles.pulangButton}
+                        disabled={time.time.cek == 0 || time.time.cek_plg == 0 || presensi.presensi.SN_OUT != null ? true : false}
                     >
                         <Text
                             style={time.time.cek_plg == 0 || presensi.presensi.SN_OUT != null ? styles.txtFotoD : styles.txtFoto}

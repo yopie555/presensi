@@ -36,7 +36,7 @@ export const datangAction = (payload) => {
             dispatch(getDatangSuccess(res.data));
 
         } catch (error) {
-            console.log('Get datang Error', error);
+            console.log('Get datang Error', error.message);
             dispatch(getDatangFailure(error));
         }
     };

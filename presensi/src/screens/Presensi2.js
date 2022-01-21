@@ -52,6 +52,7 @@ const presensi = ({ navigation }) => {
         data.append('realisasi_kerja', rencana);
         data.append('longitude', long);
         data.append('latitude', lat);
+        data.append('ip', ip.ip);
         dispatch(pulangAction({ data, token: user.auth.token }));
     };
 

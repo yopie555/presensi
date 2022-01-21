@@ -2,6 +2,7 @@ import * as types from '../constants/general';
 import axios from 'axios';
 import { BASE_URL } from '../constants/general';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { removeValue } from '../helper';
 
 
 export const getLoginRequest = () => ({
@@ -71,6 +72,7 @@ export const checkLogin = () => {
             }
         } catch (e) {
             console.log('Kosong');
+            removeValue();
         }
     };
 };

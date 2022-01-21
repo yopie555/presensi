@@ -23,7 +23,7 @@ export const ipAction = (value) => {
         try {
             dispatch(getIpRequest());
             const res = await axios.get(`https://api.myip.com/`);
-            console.log('ini ip', res.data.ip);
+            // console.log('ini ip', res.data.ip);
             dispatch(getIpSuccess(res.data.ip));
         } catch (error) {
             console.log('Get Address Error', error.response.data);
